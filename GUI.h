@@ -109,6 +109,8 @@ class MyFrame : public wxFrame
 		virtual void m_scrollBar_Rotation_XOnScroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void m_scrollBar_Rotation_YOnScroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void m_scrollBar_Rotation_ZOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void m_scrollBar_Scale_XOnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void m_scrollBar_Scale_YOnScroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void m_scrollBar_Scale_ZOnScroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void mm_checkBox_Refl_XOnCheckBox( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_checkBox_Refl_YOnCheckBox( wxCommandEvent& event ) { event.Skip(); }
