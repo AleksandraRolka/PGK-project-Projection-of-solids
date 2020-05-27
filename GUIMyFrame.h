@@ -59,7 +59,7 @@ class GUIMyFrame : public MyFrame
 		void Repaint_1();
 		void Repaint_2();
 		void Repaint_3();
-
+		void Repaint_ukosny(double alpha, double phi);
 
 
 

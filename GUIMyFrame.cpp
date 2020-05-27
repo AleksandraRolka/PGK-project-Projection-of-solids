@@ -217,7 +217,7 @@ void GUIMyFrame::m_button_Load_SettingsOnButtonClick( wxCommandEvent& event )
 
 void GUIMyFrame::m_panel_1OnUpdateUI( wxUpdateUIEvent& event )
 {
-	Repaint_1();
+	Repaint_ukosny(45.0, 31.0);
 }
 
 void GUIMyFrame::m_panel_2OnUpdateUI( wxUpdateUIEvent& event )
@@ -410,6 +410,40 @@ void GUIMyFrame::Repaint_3()
 		_begin.Set(_begin.GetX() / 2, _begin.GetY() / 2, _begin.GetZ());
 		_begin = centre * _begin;
 		_end.Set(_end.GetX() / 2, _end.GetY() / 2, _end.GetZ());
+		_end = centre * _end;
+
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
+	}
+}
+
+void GUIMyFrame::Repaint_ukosny(double alpha, double phi)
+{
+	wxClientDC client_dc(m_panel_1);
+	wxBufferedDC dc(&client_dc);
+	int w, h;
+	m_panel_1->GetSize(&w, &h);
+	dc.Clear();
+	Matrix4 transformation = Repaint_general();
+
+	Matrix4 centre = MakeCentred();
+
+	for (auto& element : data_3)
+	{
+		Vector4 _begin;
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+		_begin = transformation * _begin;
+
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		_end = transformation * _end;
+
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
+		
+		//double tg_alpha;
+
+		_begin.Set(_begin.GetX()+_begin.GetZ()*(cos(phi*M_PI/180.0)/tan(alpha*M_PI/180.0)), _begin.GetY() + _begin.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _begin.GetZ());
+		_begin = centre * _begin;
+		_end.Set(_end.GetX()+ _end.GetZ() * (cos(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _end.GetY()+ _end.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _end.GetZ());
 		_end = centre * _end;
 
 		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
