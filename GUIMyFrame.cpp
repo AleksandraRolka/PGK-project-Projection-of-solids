@@ -233,9 +233,9 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 		if (m_radioBoxUkos_1->GetSelection() == 0)
 			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);
 		else if (m_radioBoxUkos_1->GetSelection() == 1)
-			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);			// tu trzeba zamieniæ, wywo³aæ odpowiednio dla typu gabinetowego (jeszcze nie zrobione)
+			Repaint_ukosny(m_panel_1, data_1, 63.0, 31.0);			
 		else if (m_radioBoxUkos_1->GetSelection() == 2)
-			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);			// tutaj podobnie, tylko typ 'inny' (mo¿liwe, ¿e trzeba bêdzie dodaæ jakieœ suwami)
+			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
 
 
@@ -260,9 +260,9 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 		if (m_radioBoxUkos_2->GetSelection() == 0)
 			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);
 		else if (m_radioBoxUkos_2->GetSelection() == 1)
-			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);			// tu trzeba zamieniæ, wywo³aæ odpowiednio dla typu gabinetowego (jeszcze nie zrobione)
+			Repaint_ukosny(m_panel_2, data_2, 63.0, 31.0);			
 		else if (m_radioBoxUkos_2->GetSelection() == 2)
-			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);			// tutaj podobnie, tylko typ 'inny' (mo¿liwe, ¿e trzeba bêdzie dodaæ jakieœ suwami)
+			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
 
 
@@ -286,9 +286,9 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		if (m_radioBoxUkos_3->GetSelection() == 0)
 			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);
 		else if (m_radioBoxUkos_3->GetSelection() == 1)
-			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);			// tu trzeba zamieniæ, wywo³aæ odpowiednio dla typu gabinetowego (jeszcze nie zrobione)
+			Repaint_ukosny(m_panel_3, data_3, 63.0, 31.0);			
 		else if (m_radioBoxUkos_3->GetSelection() == 2)
-			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);			// tutaj podobnie, tylko typ 'inny' (mo¿liwe, ¿e trzeba bêdzie dodaæ jakieœ suwami)
+			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
 
 
