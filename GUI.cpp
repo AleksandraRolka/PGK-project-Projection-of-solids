@@ -242,18 +242,18 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	bS_Panels = new wxBoxSizer( wxHORIZONTAL );
 
 	m_panel_1 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	m_panel_1->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
+	m_panel_1->SetBackgroundColour( wxColour(*wxWHITE) );
 	m_panel_1->SetMaxSize( wxSize( 400,400 ) );
 
 	bS_Panels->Add( m_panel_1, 1, wxEXPAND | wxALL, 5 );
 
 	m_panel_2 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 400,400 ), wxTAB_TRAVERSAL );
-	m_panel_2->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
+	m_panel_2->SetBackgroundColour(wxColour(*wxWHITE));
 
 	bS_Panels->Add( m_panel_2, 1, wxEXPAND | wxALL, 5 );
 
 	m_panel_3 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	m_panel_3->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BACKGROUND ) );
+	m_panel_3->SetBackgroundColour(wxColour(*wxWHITE));
 
 	bS_Panels->Add( m_panel_3, 1, wxEXPAND | wxALL, 5 );
 
@@ -329,6 +329,8 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 
 	bS_Tabs->Add( m_auinotebook1, 1, wxEXPAND | wxALL, 5 );
 
+	m_auinotebook1->SetSelection(0);
+
 	m_auinotebook2 = new wxAuiNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE );
 	m_auinotebook2_panel_1 = new wxPanel( m_auinotebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	m_auinotebook2_panel_1->SetBackgroundColour( wxColour( 246, 246, 246 ) );
@@ -394,6 +396,8 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_auinotebook2->AddPage( m_auinotebook2_panel_4, wxT("Perspektywiczny"), true, wxNullBitmap );
 
 	bS_Tabs->Add( m_auinotebook2, 1, wxEXPAND | wxALL, 5 );
+
+	m_auinotebook2->SetSelection(0);
 
 	m_auinotebook3 = new wxAuiNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE );
 	m_auinotebook3_panel_1 = new wxPanel( m_auinotebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
@@ -461,6 +465,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 
 	bS_Tabs->Add( m_auinotebook3, 1, wxEXPAND | wxALL, 5 );
 
+	m_auinotebook3->SetSelection(0);
 
 	bSizerTop->Add( bS_Tabs, 1, wxEXPAND, 5 );
 
@@ -561,18 +566,7 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_panel_1->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_panel_1OnUpdateUI ), NULL, this );
 	m_panel_2->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_panel_2OnUpdateUI ), NULL, this );
 	m_panel_3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_panel_3OnUpdateUI ), NULL, this );
-	m_radioBoxOrtog_1->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxOrtog_1OnRadioBox ), NULL, this );
-	m_radioBoxUkos_1->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxUkos_1OnRadioBox ), NULL, this );
-	m_radioBoxAkson_1->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxAkson_1OnRadioBox ), NULL, this );
-	m_radioBoxPersp_1->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxPersp_1OnRadioBox ), NULL, this );
-	m_radioBoxOrtog_2->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxOrtog_2OnRadioBox ), NULL, this );
-	m_radioBoxUkos_2->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxUkos_2OnRadioBox ), NULL, this );
-	m_radioBoxAkson_2->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxAkson_2OnRadioBox ), NULL, this );
-	m_radioBoxPersp_2->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxPersp_2OnRadioBox ), NULL, this );
-	m_radioBoxOrtog_3->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxOrtog_3OnRadioBox ), NULL, this );
-	m_radioBoxUkos_3->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxUkos_3OnRadioBox ), NULL, this );
-	m_radioBoxAkson_3->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxAkson_3OnRadioBox ), NULL, this );
-	m_radioBoxPersp_3->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxPersp_3OnRadioBox ), NULL, this );
+
 }
 
 MyFrame::~MyFrame()
@@ -668,17 +662,6 @@ MyFrame::~MyFrame()
 	m_panel_1->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_panel_1OnUpdateUI ), NULL, this );
 	m_panel_2->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_panel_2OnUpdateUI ), NULL, this );
 	m_panel_3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MyFrame::m_panel_3OnUpdateUI ), NULL, this );
-	m_radioBoxOrtog_1->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxOrtog_1OnRadioBox ), NULL, this );
-	m_radioBoxUkos_1->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxUkos_1OnRadioBox ), NULL, this );
-	m_radioBoxAkson_1->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxAkson_1OnRadioBox ), NULL, this );
-	m_radioBoxPersp_1->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxPersp_1OnRadioBox ), NULL, this );
-	m_radioBoxOrtog_2->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxOrtog_2OnRadioBox ), NULL, this );
-	m_radioBoxUkos_2->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxUkos_2OnRadioBox ), NULL, this );
-	m_radioBoxAkson_2->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxAkson_2OnRadioBox ), NULL, this );
-	m_radioBoxPersp_2->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxPersp_2OnRadioBox ), NULL, this );
-	m_radioBoxOrtog_3->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxOrtog_3OnRadioBox ), NULL, this );
-	m_radioBoxUkos_3->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxUkos_3OnRadioBox ), NULL, this );
-	m_radioBoxAkson_3->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxAkson_3OnRadioBox ), NULL, this );
-	m_radioBoxPersp_3->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( MyFrame::m_radioBoxPersp_3OnRadioBox ), NULL, this );
+
 
 }

@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <cmath>
+#include <memory>
 #include "vecmat.h"
 
 
@@ -23,57 +24,123 @@ struct Segment {
 	Segment(Point _begin, Point _end, Color _color) : begin(_begin), end(_end), color(_color) {}
 };
 
-// ******* chyba wygodnie bêdzie tak rozdzieliæ dane na 3 wektory, dla ka¿dego panelu osobno
+/* Separete data accordingly for all three solid - in m_panel_1, m_panel_2 and m_panel_3 */
 std::vector<Segment> data_1;
 std::vector<Segment> data_2;
 std::vector<Segment> data_3;
 
+/*Matrices which allow various transformations*/
 
-
-GUIMyFrame::GUIMyFrame( wxWindow* parent )
-:
-MyFrame( parent )
+Matrix4 Translation(double dx, double dy, double dz)
 {
-	m_scrollBar_Translation_X->SetScrollbar(100,  1, 200,  1, true);
-	m_scrollBar_Translation_Y->SetScrollbar(100,  1, 200,  1, true);
-	m_scrollBar_Translation_Z->SetScrollbar(100,  1, 200,  1, true);
+	Matrix4 translation;
+	translation.data[0][3] = dx;
+	translation.data[1][3] = -dy;
+	translation.data[2][3] = dz;
+	translation.data[0][0] = 1;
+	translation.data[1][1] = 1;
+	translation.data[2][2] = 1;
+	return translation;
+}
 
-	m_scrollBar_Rotation_X->SetScrollbar(0,  1, 360,  1, true);
-	m_scrollBar_Rotation_Y->SetScrollbar(0,  1, 360,  1, true);
-	m_scrollBar_Rotation_Z->SetScrollbar(0,  1, 360,  1, true);
+Matrix4 RotateX(int theta)
+{
+	Matrix4 rotateX;
+	rotateX.data[0][0] = 1;
+	rotateX.data[1][1] = cos(theta * M_PI / 180);
+	rotateX.data[1][2] = -sin(theta * M_PI / 180);
+	rotateX.data[2][1] = sin(theta * M_PI / 180);
+	rotateX.data[2][2] = cos(theta * M_PI / 180);
+	return rotateX;
+}
 
-	m_scrollBar_Scale_X->SetScrollbar(50,  1, 200,  1, true);
-	m_scrollBar_Scale_Y->SetScrollbar(50,  1, 200,  1, true);
-	m_scrollBar_Scale_Z->SetScrollbar(50,  1, 200,  1, true);
+Matrix4 RotateY(int theta)
+{
+	Matrix4 rotateY;
+	rotateY.data[0][0] = cos(-(theta * M_PI / 180));
+	rotateY.data[0][2] = sin(-(theta * M_PI / 180));
+	rotateY.data[1][1] = 1;
+	rotateY.data[2][0] = -sin(-(theta * M_PI / 180));
+	rotateY.data[2][2] = cos(-(theta * M_PI / 180));
+	return rotateY;
+}
+
+Matrix4 RotateZ(int theta)
+{
+	Matrix4 rotateZ;
+	rotateZ.data[0][0] = cos(theta * M_PI / 180);
+	rotateZ.data[0][1] = -sin(theta * M_PI / 180);
+	rotateZ.data[1][0] = sin(theta * M_PI / 180);
+	rotateZ.data[1][1] = cos(theta * M_PI / 180);
+	rotateZ.data[2][2] = 1;
+	return rotateZ;
+}
+
+Matrix4 Scale(double s_x, double s_y, double s_z)
+{
+	Matrix4 scale;
+	scale.data[0][0] = s_x;
+	scale.data[1][1] = -s_y;
+	scale.data[2][2] = s_z;
+	return scale;
+}
+
+Matrix4 MakeCentred()
+{
+	Matrix4 centre;
+	centre.data[0][0] = 1;
+	centre.data[1][1] = 1;
+	centre.data[2][2] = 1;
+	centre.data[0][3] = 0.5;
+	centre.data[1][3] = 0.5;
+	return centre;
+}
+
+
+GUIMyFrame::GUIMyFrame(wxWindow* parent)
+	:
+	MyFrame(parent)
+{
+	m_scrollBar_Translation_X->SetScrollbar(100, 1, 200, 1, true);
+	m_scrollBar_Translation_Y->SetScrollbar(100, 1, 200, 1, true);
+	m_scrollBar_Translation_Z->SetScrollbar(100, 1, 200, 1, true);
+
+	m_scrollBar_Rotation_X->SetScrollbar(0, 1, 360, 1, true);
+	m_scrollBar_Rotation_Y->SetScrollbar(0, 1, 360, 1, true);
+	m_scrollBar_Rotation_Z->SetScrollbar(0, 1, 360, 1, true);
+
+	m_scrollBar_Scale_X->SetScrollbar(50, 1, 200, 1, true);
+	m_scrollBar_Scale_Y->SetScrollbar(50, 1, 200, 1, true);
+	m_scrollBar_Scale_Z->SetScrollbar(50, 1, 200, 1, true);
 
 }
 
-void GUIMyFrame::m_scrollBar_Translation_XOnScroll( wxScrollEvent& event )
+void GUIMyFrame::m_scrollBar_Translation_XOnScroll(wxScrollEvent& event)
 {
 	//m_staticText_Translation_X_val->SetLabel(wxString::Format(wxT("%g"), (m_scrollBar_Translation_X->GetThumbPosition() - 50) / 100));
 }
 
-void GUIMyFrame::m_scrollBar_Translation_YOnScroll( wxScrollEvent& event )
+void GUIMyFrame::m_scrollBar_Translation_YOnScroll(wxScrollEvent& event)
 {
 	//m_staticText_Translation_Y_val->SetLabel(wxString::Format(wxT("%g"), (m_scrollBar_Translation_Y->GetThumbPosition() - 100) /100));
 }
 
-void GUIMyFrame::m_scrollBar_Translation_ZOnScroll( wxScrollEvent& event )
+void GUIMyFrame::m_scrollBar_Translation_ZOnScroll(wxScrollEvent& event)
 {
 	//m_staticText_Translation_Z_val->SetLabel(wxString::Format(wxT("%g"), (m_scrollBar_Translation_Z->GetThumbPosition() - 100) /100));
 }
 
-void GUIMyFrame::m_scrollBar_Rotation_XOnScroll( wxScrollEvent& event )
+void GUIMyFrame::m_scrollBar_Rotation_XOnScroll(wxScrollEvent& event)
 {
 	//mm_staticText_Rotation_X_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_Rotation_X->GetThumbPosition()));
 }
 
-void GUIMyFrame::m_scrollBar_Rotation_YOnScroll( wxScrollEvent& event )
+void GUIMyFrame::m_scrollBar_Rotation_YOnScroll(wxScrollEvent& event)
 {
 	//mm_staticText_Rotation_Y_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_Rotation_Y->GetThumbPosition()));
 }
 
-void GUIMyFrame::m_scrollBar_Rotation_ZOnScroll( wxScrollEvent& event )
+void GUIMyFrame::m_scrollBar_Rotation_ZOnScroll(wxScrollEvent& event)
 {
 	//mm_staticText_Rotation_Z_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_Rotation_Z->GetThumbPosition()));
 }
@@ -93,22 +160,22 @@ void GUIMyFrame::m_scrollBar_Scale_ZOnScroll(wxScrollEvent& event)
 	mm_staticText_Scale_Z_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_Scale_Z->GetThumbPosition() / 100.0));
 }
 
-void GUIMyFrame::mm_checkBox_Refl_XOnCheckBox( wxCommandEvent& event )
+void GUIMyFrame::mm_checkBox_Refl_XOnCheckBox(wxCommandEvent& event)
 {
-// TODO: Implement mm_checkBox_Refl_XOnCheckBox
+	// TODO: Implement mm_checkBox_Refl_XOnCheckBox
 }
 
-void GUIMyFrame::m_checkBox_Refl_YOnCheckBox( wxCommandEvent& event )
+void GUIMyFrame::m_checkBox_Refl_YOnCheckBox(wxCommandEvent& event)
 {
-// TODO: Implement m_checkBox_Refl_YOnCheckBox
+	// TODO: Implement m_checkBox_Refl_YOnCheckBox
 }
 
-void GUIMyFrame::m_checkBox_Refl_ZOnCheckBox( wxCommandEvent& event )
+void GUIMyFrame::m_checkBox_Refl_ZOnCheckBox(wxCommandEvent& event)
 {
-// TODO: Implement m_checkBox_Refl_ZOnCheckBox
+	// TODO: Implement m_checkBox_Refl_ZOnCheckBox
 }
 
-void GUIMyFrame::m_button_Load_SolidOnButtonClick( wxCommandEvent& event )
+void GUIMyFrame::m_button_Load_SolidOnButtonClick(wxCommandEvent& event)
 {
 
 	wxFileDialog WxOpenFileDialog(this, wxT("Choose a file"), wxT(""), wxT(""), wxT("Geometry file (*.geo)|*.geo"), wxFD_OPEN | wxFD_FILE_MUST_EXIST);
@@ -134,375 +201,226 @@ void GUIMyFrame::m_button_Load_SolidOnButtonClick( wxCommandEvent& event )
 			in.close();
 		}
 	}
+
+
+}
+
+void GUIMyFrame::m_button_Save_SettingsOnButtonClick(wxCommandEvent& event)
+{
+	// TODO: Implement m_button_Save_SettingsOnButtonClick
+}
+
+void GUIMyFrame::m_button_Load_SettingsOnButtonClick(wxCommandEvent& event)
+{
+	// TODO: Implement m_button_Load_SettingsOnButtonClick
+}
+
+void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
+{
+
+	if (m_auinotebook1->GetSelection() == 0) {
+
+		if(m_radioBoxOrtog_1->GetSelection() == 0)		
+			Repaint_OrtogYZ(m_panel_1, data_1);
+		else if (m_radioBoxOrtog_1->GetSelection() == 1)		
+			Repaint_OrtogXZ(m_panel_1, data_1);
+		else if (m_radioBoxOrtog_1->GetSelection() == 2)
+			Repaint_OrtogXY(m_panel_1, data_1);
+
+
+	}
+	else if (m_auinotebook1->GetSelection() == 1) {
+		if (m_radioBoxUkos_1->GetSelection() == 0)
+			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);
+		else if (m_radioBoxUkos_1->GetSelection() == 1)
+			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);			// tu trzeba zamieniæ, wywo³aæ odpowiednio dla typu gabinetowego (jeszcze nie zrobione)
+		else if (m_radioBoxUkos_1->GetSelection() == 2)
+			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);			// tutaj podobnie, tylko typ 'inny' (mo¿liwe, ¿e trzeba bêdzie dodaæ jakieœ suwami)
+	}
+
+
+
+
+
+}
+
+void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
+{
+
+	if (m_auinotebook2->GetSelection() == 0) {
+
+		if (m_radioBoxOrtog_2->GetSelection() == 0)
+			Repaint_OrtogYZ(m_panel_2, data_2);
+		else if (m_radioBoxOrtog_2->GetSelection() == 1)
+			Repaint_OrtogXZ(m_panel_2, data_2);
+		else if (m_radioBoxOrtog_2->GetSelection() == 2)
+			Repaint_OrtogXY(m_panel_2, data_2);
+	}
+	else if (m_auinotebook2->GetSelection() == 1) {
+		if (m_radioBoxUkos_2->GetSelection() == 0)
+			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);
+		else if (m_radioBoxUkos_2->GetSelection() == 1)
+			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);			// tu trzeba zamieniæ, wywo³aæ odpowiednio dla typu gabinetowego (jeszcze nie zrobione)
+		else if (m_radioBoxUkos_2->GetSelection() == 2)
+			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);			// tutaj podobnie, tylko typ 'inny' (mo¿liwe, ¿e trzeba bêdzie dodaæ jakieœ suwami)
+	}
+
+
+
+
+
+}
+
+void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
+{
+
+	if (m_auinotebook3->GetSelection() == 0) {
+		if (m_radioBoxOrtog_3->GetSelection() == 0)
+			Repaint_OrtogYZ(m_panel_3, data_3);
+		else if (m_radioBoxOrtog_3->GetSelection() == 1)
+			Repaint_OrtogXZ(m_panel_3, data_3);
+		else if (m_radioBoxOrtog_3->GetSelection() == 2)
+			Repaint_OrtogXY(m_panel_3, data_3);
+	}
+	else if (m_auinotebook3->GetSelection() == 1) {
+		if (m_radioBoxUkos_3->GetSelection() == 0)
+			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);
+		else if (m_radioBoxUkos_3->GetSelection() == 1)
+			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);			// tu trzeba zamieniæ, wywo³aæ odpowiednio dla typu gabinetowego (jeszcze nie zrobione)
+		else if (m_radioBoxUkos_3->GetSelection() == 2)
+			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);			// tutaj podobnie, tylko typ 'inny' (mo¿liwe, ¿e trzeba bêdzie dodaæ jakieœ suwami)
+	}
+
+
+
+
+
+}
+
+
+
+
+
+Matrix4 GUIMyFrame::Repaint_general()
+{
+	//////////////////////// scale /////////////////////////
+	Matrix4 scale_matrix = Scale(m_scrollBar_Scale_X->GetThumbPosition() / 100.0, -m_scrollBar_Scale_Y->GetThumbPosition() / 100.0, m_scrollBar_Scale_Z->GetThumbPosition() / 100.0);
+
+	/////////////////////// rotation ///////////////////////
+	Matrix4 rotation_matrix;
+	Matrix4 X_rotation_matrix, Y_rotation_matrix, Z_rotation_matrix;
+
+	X_rotation_matrix = RotateX(m_scrollBar_Rotation_X->GetThumbPosition());
+	Y_rotation_matrix = RotateY(m_scrollBar_Rotation_Y->GetThumbPosition());
+	Z_rotation_matrix = RotateY(m_scrollBar_Rotation_Z->GetThumbPosition());
+
+	rotation_matrix = X_rotation_matrix * Y_rotation_matrix * Z_rotation_matrix;
+
+	////////////////////// translation //////////////////////
+	Matrix4 translation_matrix;
+	translation_matrix = Translation((m_scrollBar_Translation_X->GetThumbPosition() - 100.0) / 50.0,
+		(m_scrollBar_Translation_Y->GetThumbPosition() - 100.0) / 50.0, (m_scrollBar_Translation_Z->GetThumbPosition() - 100.0) / 50.0);
+
+	// transformation matrix = translation * rotation * scale
+	auto transformation = std::make_unique<Matrix4>();
+	*transformation = translation_matrix * rotation_matrix * scale_matrix;
+	return *transformation;
+}
+
+
+void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num, std::vector<Segment> data_num)
+{
+	wxClientDC client_dc(m_panel_num);
+	wxBufferedDC dc(&client_dc);
+	int w, h;
+	m_panel_num->GetSize(&w, &h);
+	dc.Clear();
+
+	Matrix4 transformation = Repaint_general();
+
+	Matrix4 centre = MakeCentred();
+
+	for (auto& element : data_num)
+	{
+		Vector4 _begin;
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+		_begin = transformation * _begin;
+
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		_end = transformation * _end;
+
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
+
+		_begin.Set(_begin.GetX(), _begin.GetY() / 2, _begin.GetZ() / 2);
+		_begin = centre * _begin;
+		_end.Set(_end.GetX(), _end.GetY() / 2, _end.GetZ() / 2);
+		_end = centre * _end;
+
+		dc.DrawLine(_begin.GetY() * w, _begin.GetZ() * h, _end.GetY() * w, _end.GetZ() * h);
+	}
+}
+
+
+void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num, std::vector<Segment> data_num)
+{
 	
 
-}
 
-void GUIMyFrame::m_button_Save_SettingsOnButtonClick( wxCommandEvent& event )
-{
-// TODO: Implement m_button_Save_SettingsOnButtonClick
-}
 
-void GUIMyFrame::m_button_Load_SettingsOnButtonClick( wxCommandEvent& event )
-{
-// TODO: Implement m_button_Load_SettingsOnButtonClick
-}
 
-void GUIMyFrame::m_panel_1OnUpdateUI( wxUpdateUIEvent& event )
-{
-	Repaint_1();
-}
 
-void GUIMyFrame::m_panel_2OnUpdateUI( wxUpdateUIEvent& event )
-{
-	Repaint_2();
-}
 
-void GUIMyFrame::m_panel_3OnUpdateUI( wxUpdateUIEvent& event )
-{
-	Repaint_3();
-}
 
-void GUIMyFrame::m_radioBoxOrtog_1OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxOrtog_1OnRadioBox
-}
 
-void GUIMyFrame::m_radioBoxUkos_1OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxUkos_1OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxAkson_1OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxAkson_1OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxPersp_1OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxPersp_1OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxOrtog_2OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxOrtog_2OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxUkos_2OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxUkos_2OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxAkson_2OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxAkson_2OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxPersp_2OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxPersp_2OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxOrtog_3OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxOrtog_3OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxUkos_3OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxUkos_3OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxAkson_3OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxAkson_3OnRadioBox
-}
-
-void GUIMyFrame::m_radioBoxPersp_3OnRadioBox( wxCommandEvent& event )
-{
-// TODO: Implement m_radioBoxPersp_3OnRadioBox
 }
 
 
-void GUIMyFrame::Repaint_1()
+void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num, std::vector<Segment> data_num)
 {
-	wxClientDC client_dc(m_panel_1);
+	
+
+
+
+
+
+
+
+
+}
+
+
+void GUIMyFrame::Repaint_ukosny(wxPanel* m_panel_num, std::vector<Segment> data_num, double alpha, double phi)
+{
+	wxClientDC client_dc(m_panel_num);
 	wxBufferedDC dc(&client_dc);
 	int w, h;
-	m_panel_1->GetSize(&w, &h);
+	m_panel_num->GetSize(&w, &h);
 	dc.Clear();
+	Matrix4 transformation = Repaint_general();
+
+	Matrix4 centre = MakeCentred();
 
 
-	//////////////////////// scale /////////////////////////
-	Matrix4 scale_matrix;
-
-	scale_matrix.data[0][0] = m_scrollBar_Scale_X->GetThumbPosition() / 100.0;
-	scale_matrix.data[1][1] = -m_scrollBar_Scale_Y->GetThumbPosition() / 100.0;
-	scale_matrix.data[2][2] = m_scrollBar_Scale_Z->GetThumbPosition() / 100.0;
-	scale_matrix.data[3][3] = 1.0;
-
-
-	/////////////////////// rotation ///////////////////////
-	Matrix4 rotation_matrix;
-	Matrix4 X_rotation_matrix, Y_rotation_matrix, Z_rotation_matrix;
-
-	//converting angles for radians 
-	double rotation_x = m_scrollBar_Rotation_X->GetThumbPosition() * PI / 180;
-	double rotation_y = m_scrollBar_Rotation_Y->GetThumbPosition() * PI / 180;
-	double rotation_z = m_scrollBar_Rotation_Z->GetThumbPosition() * PI / 180;
-
-	//rotation around axis x
-	X_rotation_matrix.data[0][0] = 1.0;
-	X_rotation_matrix.data[1][1] = cos(rotation_x);
-	X_rotation_matrix.data[1][2] = -sin(rotation_x);
-	X_rotation_matrix.data[2][1] = sin(rotation_x);
-	X_rotation_matrix.data[2][2] = cos(rotation_x);
-	//rotation around axis y
-	Y_rotation_matrix.data[0][0] = cos(rotation_y);
-	Y_rotation_matrix.data[0][2] = sin(rotation_y);
-	Y_rotation_matrix.data[1][1] = 1.0;
-	Y_rotation_matrix.data[2][0] = -sin(rotation_y);
-	Y_rotation_matrix.data[2][2] = cos(rotation_y);
-	//rotation around axis z
-	Z_rotation_matrix.data[0][0] = cos(rotation_z);
-	Z_rotation_matrix.data[0][1] = -sin(rotation_z);
-	Z_rotation_matrix.data[1][0] = sin(rotation_z);
-	Z_rotation_matrix.data[1][1] = cos(rotation_z);
-	Z_rotation_matrix.data[2][2] = 1.0;
-
-	rotation_matrix = X_rotation_matrix * Y_rotation_matrix * Z_rotation_matrix;
-
-
-	////////////////////// translation //////////////////////
-	Matrix4 translation_matrix;
-
-	translation_matrix.data[0][0] = 1.0;
-	translation_matrix.data[1][1] = 1.0;
-	translation_matrix.data[2][2] = 1.0;
-	translation_matrix.data[0][3] = (m_scrollBar_Translation_X->GetThumbPosition() - 100.0) / 50.0;
-	translation_matrix.data[1][3] = -(m_scrollBar_Translation_Y->GetThumbPosition() - 100.0) / 50.0;
-	translation_matrix.data[2][3] = (m_scrollBar_Translation_Z->GetThumbPosition() - 100.0) / 50.0 + 2;
-
-	// transformation matrix = translation * rotation * scale
-	Matrix4 transformation = translation_matrix * rotation_matrix * scale_matrix;
-
-	Matrix4 centre;
-	centre.data[0][0] = 1;
-	centre.data[1][1] = 1;
-	centre.data[2][2] = 1;
-	centre.data[0][3] = 0.5;
-	centre.data[1][3] = 0.5;
-
-
-	for (unsigned int i = 0; i < data_1.size(); ++i)
+	for (auto& element : data_num)	
 	{
 		Vector4 _begin;
-		_begin.Set(data_1[i].begin.x, data_1[i].begin.y, data_1[i].begin.z);
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
 		_begin = transformation * _begin;
 
 		Vector4 _end;
-		_end.Set(data_1[i].end.x, data_1[i].end.y, data_1[i].end.z);
+		_end.Set(element.end.x, element.end.y, element.end.z);
 		_end = transformation * _end;
 
-		dc.SetPen(wxPen(wxColour(data_1[i].color.R, data_1[i].color.G, data_1[i].color.B)));
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		if (_begin.GetZ() > 0 && _end.GetZ() > 0)
-		{
-			_begin.Set(_begin.GetX() / _begin.GetZ(), _begin.GetY() / _begin.GetZ(), _begin.GetZ());
-			_begin = centre * _begin;
-			_end.Set(_end.GetX() / _end.GetZ(), _end.GetY() / _end.GetZ(), _end.GetZ());
-			_end = centre * _end;
+		//double tg_alpha;
 
-			dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
-		}
-	}
-}
+		_begin.Set(_begin.GetX() + _begin.GetZ()*(cos(phi*M_PI / 180.0) / tan(alpha*M_PI / 180.0)), _begin.GetY() + _begin.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _begin.GetZ());
+		_begin = centre * _begin;
+		_end.Set(_end.GetX() + _end.GetZ() * (cos(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _end.GetY() + _end.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _end.GetZ());
+		_end = centre * _end;
 
-void GUIMyFrame::Repaint_2()
-{
-
-	wxClientDC client_dc(m_panel_2);
-	wxBufferedDC dc(&client_dc);
-	int w, h;
-	m_panel_2->GetSize(&w, &h);
-	dc.Clear();
-
-
-	//////////////////////// scale /////////////////////////
-	Matrix4 scale_matrix;
-
-	scale_matrix.data[0][0] = m_scrollBar_Scale_X->GetThumbPosition() / 100.0;
-	scale_matrix.data[1][1] = -m_scrollBar_Scale_Y->GetThumbPosition() / 100.0;
-	scale_matrix.data[2][2] = m_scrollBar_Scale_Z->GetThumbPosition() / 100.0;
-	scale_matrix.data[3][3] = 1.0;
-
-
-	/////////////////////// rotation ///////////////////////
-	Matrix4 rotation_matrix;
-	Matrix4 X_rotation_matrix, Y_rotation_matrix, Z_rotation_matrix;
-
-	//converting angles for radians 
-	double rotation_x = m_scrollBar_Rotation_X->GetThumbPosition() * PI / 180;
-	double rotation_y = m_scrollBar_Rotation_Y->GetThumbPosition() * PI / 180;
-	double rotation_z = m_scrollBar_Rotation_Z->GetThumbPosition() * PI / 180;
-
-	//rotation around axis x
-	X_rotation_matrix.data[0][0] = 1.0;
-	X_rotation_matrix.data[1][1] = cos(rotation_x);
-	X_rotation_matrix.data[1][2] = -sin(rotation_x);
-	X_rotation_matrix.data[2][1] = sin(rotation_x);
-	X_rotation_matrix.data[2][2] = cos(rotation_x);
-	//rotation around axis y
-	Y_rotation_matrix.data[0][0] = cos(rotation_y);
-	Y_rotation_matrix.data[0][2] = sin(rotation_y);
-	Y_rotation_matrix.data[1][1] = 1.0;
-	Y_rotation_matrix.data[2][0] = -sin(rotation_y);
-	Y_rotation_matrix.data[2][2] = cos(rotation_y);
-	//rotation around axis z
-	Z_rotation_matrix.data[0][0] = cos(rotation_z);
-	Z_rotation_matrix.data[0][1] = -sin(rotation_z);
-	Z_rotation_matrix.data[1][0] = sin(rotation_z);
-	Z_rotation_matrix.data[1][1] = cos(rotation_z);
-	Z_rotation_matrix.data[2][2] = 1.0;
-
-	rotation_matrix = X_rotation_matrix * Y_rotation_matrix * Z_rotation_matrix;
-
-
-	////////////////////// translation //////////////////////
-	Matrix4 translation_matrix;
-
-	translation_matrix.data[0][0] = 1.0;
-	translation_matrix.data[1][1] = 1.0;
-	translation_matrix.data[2][2] = 1.0;
-	translation_matrix.data[0][3] = (m_scrollBar_Translation_X->GetThumbPosition() - 100.0) / 50.0;
-	translation_matrix.data[1][3] = -(m_scrollBar_Translation_Y->GetThumbPosition() - 100.0) / 50.0;
-	translation_matrix.data[2][3] = (m_scrollBar_Translation_Z->GetThumbPosition() - 100.0) / 50.0 + 2;
-
-	// transformation matrix = translation * rotation * scale
-	Matrix4 transformation = translation_matrix * rotation_matrix * scale_matrix;
-
-	Matrix4 centre;
-	centre.data[0][0] = 1;
-	centre.data[1][1] = 1;
-	centre.data[2][2] = 1;
-	centre.data[0][3] = 0.5;
-	centre.data[1][3] = 0.5;
-
-
-	for (unsigned int i = 0; i < data_2.size(); ++i)
-	{
-		Vector4 _begin;
-		_begin.Set(data_2[i].begin.x, data_2[i].begin.y, data_2[i].begin.z);
-		_begin = transformation * _begin;
-
-		Vector4 _end;
-		_end.Set(data_2[i].end.x, data_2[i].end.y, data_2[i].end.z);
-		_end = transformation * _end;
-
-		dc.SetPen(wxPen(wxColour(data_2[i].color.R, data_2[i].color.G, data_2[i].color.B)));
-
-		if (_begin.GetZ() > 0 && _end.GetZ() > 0)
-		{
-			_begin.Set(_begin.GetX() / _begin.GetZ(), _begin.GetY() / _begin.GetZ(), _begin.GetZ());
-			_begin = centre * _begin;
-			_end.Set(_end.GetX() / _end.GetZ(), _end.GetY() / _end.GetZ(), _end.GetZ());
-			_end = centre * _end;
-
-			dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
-		}
-	}
-}
-
-void GUIMyFrame::Repaint_3()
-{
-	wxClientDC client_dc(m_panel_3);
-	wxBufferedDC dc(&client_dc);
-	int w, h;
-	m_panel_3->GetSize(&w, &h);
-	dc.Clear();
-
-
-	//////////////////////// scale /////////////////////////
-	Matrix4 scale_matrix;
-
-	scale_matrix.data[0][0] = m_scrollBar_Scale_X->GetThumbPosition() / 100.0;
-	scale_matrix.data[1][1] = -m_scrollBar_Scale_Y->GetThumbPosition() / 100.0;
-	scale_matrix.data[2][2] = m_scrollBar_Scale_Z->GetThumbPosition() / 100.0;
-	scale_matrix.data[3][3] = 1.0;
-
-
-	/////////////////////// rotation ///////////////////////
-	Matrix4 rotation_matrix;
-	Matrix4 X_rotation_matrix, Y_rotation_matrix, Z_rotation_matrix;
-
-	//converting angles for radians 
-	double rotation_x = m_scrollBar_Rotation_X->GetThumbPosition() * PI / 180;
-	double rotation_y = m_scrollBar_Rotation_Y->GetThumbPosition() * PI / 180;
-	double rotation_z = m_scrollBar_Rotation_Z->GetThumbPosition() * PI / 180;
-
-	//rotation around axis x
-	X_rotation_matrix.data[0][0] = 1.0;
-	X_rotation_matrix.data[1][1] = cos(rotation_x);
-	X_rotation_matrix.data[1][2] = -sin(rotation_x);
-	X_rotation_matrix.data[2][1] = sin(rotation_x);
-	X_rotation_matrix.data[2][2] = cos(rotation_x);
-	//rotation around axis y
-	Y_rotation_matrix.data[0][0] = cos(rotation_y);
-	Y_rotation_matrix.data[0][2] = sin(rotation_y);
-	Y_rotation_matrix.data[1][1] = 1.0;
-	Y_rotation_matrix.data[2][0] = -sin(rotation_y);
-	Y_rotation_matrix.data[2][2] = cos(rotation_y);
-	//rotation around axis z
-	Z_rotation_matrix.data[0][0] = cos(rotation_z);
-	Z_rotation_matrix.data[0][1] = -sin(rotation_z);
-	Z_rotation_matrix.data[1][0] = sin(rotation_z);
-	Z_rotation_matrix.data[1][1] = cos(rotation_z);
-	Z_rotation_matrix.data[2][2] = 1.0;
-
-	rotation_matrix = X_rotation_matrix * Y_rotation_matrix * Z_rotation_matrix;
-
-
-	////////////////////// translation //////////////////////
-	Matrix4 translation_matrix;
-
-	translation_matrix.data[0][0] = 1.0;
-	translation_matrix.data[1][1] = 1.0;
-	translation_matrix.data[2][2] = 1.0;
-	translation_matrix.data[0][3] = (m_scrollBar_Translation_X->GetThumbPosition() - 100.0) / 50.0;
-	translation_matrix.data[1][3] = -(m_scrollBar_Translation_Y->GetThumbPosition() - 100.0) / 50.0;
-	translation_matrix.data[2][3] = (m_scrollBar_Translation_Z->GetThumbPosition() - 100.0) / 50.0 + 2;
-
-	// transformation matrix = translation * rotation * scale
-	Matrix4 transformation = translation_matrix * rotation_matrix * scale_matrix;
-
-	Matrix4 centre;
-	centre.data[0][0] = 1;
-	centre.data[1][1] = 1;
-	centre.data[2][2] = 1;
-	centre.data[0][3] = 0.5;
-	centre.data[1][3] = 0.5;
-
-
-	for (unsigned int i = 0; i < data_3.size(); ++i)
-	{
-		Vector4 _begin;
-		_begin.Set(data_3[i].begin.x, data_3[i].begin.y, data_3[i].begin.z);
-		_begin = transformation * _begin;
-
-		Vector4 _end;
-		_end.Set(data_3[i].end.x, data_3[i].end.y, data_3[i].end.z);
-		_end = transformation * _end;
-
-		dc.SetPen(wxPen(wxColour(data_3[i].color.R, data_3[i].color.G, data_3[i].color.B)));
-
-		if (_begin.GetZ() > 0 && _end.GetZ() > 0)
-		{
-			_begin.Set(_begin.GetX() / _begin.GetZ(), _begin.GetY() / _begin.GetZ(), _begin.GetZ());
-			_begin = centre * _begin;
-			_end.Set(_end.GetX() / _end.GetZ(), _end.GetY() / _end.GetZ(), _end.GetZ());
-			_end = centre * _end;
-
-			dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
-		}
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
 	}
 }

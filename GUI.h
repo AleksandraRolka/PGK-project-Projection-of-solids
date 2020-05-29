@@ -27,6 +27,7 @@
 #include <wx/aui/auibook.h>
 #include <wx/frame.h>
 
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -121,18 +122,7 @@ class MyFrame : public wxFrame
 		virtual void m_panel_1OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void m_panel_2OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void m_panel_3OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxOrtog_1OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxUkos_1OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxAkson_1OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxPersp_1OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxOrtog_2OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxUkos_2OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxAkson_2OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxPersp_2OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxOrtog_3OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxUkos_3OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxAkson_3OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void m_radioBoxPersp_3OnRadioBox( wxCommandEvent& event ) { event.Skip(); }
+
 
 
 	public:
