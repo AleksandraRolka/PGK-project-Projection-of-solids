@@ -43,6 +43,18 @@ protected:
 	void m_panel_1OnUpdateUI(wxUpdateUIEvent& event);
 	void m_panel_2OnUpdateUI(wxUpdateUIEvent& event);
 	void m_panel_3OnUpdateUI(wxUpdateUIEvent& event);
+	void m_scrollBar_ukosny1_alfaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_ukosny1_phiOnScroll(wxScrollEvent& event);
+	void m_scrollBar_akson1_alfaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_akson1_betaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_ukosny2_alfaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_ukosny2_phiOnScroll(wxScrollEvent& event);
+	void m_scrollBar_akson2_alfaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_akson2_betaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_ukosny3_alfaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_ukosny3_phiOnScroll(wxScrollEvent& event);
+	void m_scrollBar_akson3_alfaOnScroll(wxScrollEvent& event);
+	void m_scrollBar_akson3_betaOnScroll(wxScrollEvent& event);
 
 public:
 	/** Constructor */
@@ -51,10 +63,10 @@ public:
 	Matrix4 Repaint_general(); // returns Matrix after all transformations
 
 
-	void Repaint_OrtogYZ(wxPanel* m_panel_num, std::vector<Segment> data_num);
-	void Repaint_OrtogXZ(wxPanel* m_panel_num, std::vector<Segment> data_num);
-	void Repaint_OrtogXY(wxPanel* m_panel_num, std::vector<Segment> data_num);
-	void Repaint_ukosny(wxPanel* m_panel_num, std::vector<Segment> data_num, double alpha, double phi);
+	void Repaint_OrtogYZ(wxPanel* m_panel_num);
+	void Repaint_OrtogXZ(wxPanel* m_panel_num);
+	void Repaint_OrtogXY(wxPanel* m_panel_num);
+	void Repaint_ukosny(wxPanel* m_panel_num, double alpha, double phi);
 
 
 

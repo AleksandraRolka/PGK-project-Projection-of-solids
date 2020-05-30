@@ -1,4 +1,4 @@
-#include "GUIMyFrame.h"
+ï»¿#include "GUIMyFrame.h"
 #include <vector>
 #include <fstream>
 #include <cmath>
@@ -24,10 +24,8 @@ struct Segment {
 	Segment(Point _begin, Point _end, Color _color) : begin(_begin), end(_end), color(_color) {}
 };
 
-/* Separete data accordingly for all three solid - in m_panel_1, m_panel_2 and m_panel_3 */
-std::vector<Segment> data_1;
-std::vector<Segment> data_2;
-std::vector<Segment> data_3;
+
+std::vector<Segment> data;
 
 /*Matrices which allow various transformations*/
 
@@ -113,6 +111,22 @@ GUIMyFrame::GUIMyFrame(wxWindow* parent)
 	m_scrollBar_Scale_Y->SetScrollbar(50, 1, 200, 1, true);
 	m_scrollBar_Scale_Z->SetScrollbar(50, 1, 200, 1, true);
 
+
+	m_scrollBar_ukosny1_alfa->SetScrollbar(45, 1, 160, 1, true);
+	m_scrollBar_ukosny1_phi->SetScrollbar(45, 1, 360, 1, true);
+	m_scrollBar_akson1_alfa->SetScrollbar(45, 1, 360, 1, true);
+	m_scrollBar_akson1_beta->SetScrollbar(35, 1, 360, 1, true);
+
+	m_scrollBar_ukosny2_alfa->SetScrollbar(45, 1, 160, 1, true);
+	m_scrollBar_ukosny2_phi->SetScrollbar(45, 1, 360, 1, true);
+	m_scrollBar_akson2_alfa->SetScrollbar(45, 1, 360, 1, true);
+	m_scrollBar_akson2_beta->SetScrollbar(35, 1, 360, 1, true);
+
+	m_scrollBar_ukosny3_alfa->SetScrollbar(45, 1, 160, 1, true);
+	m_scrollBar_ukosny3_phi->SetScrollbar(45, 1, 360, 1, true);
+	m_scrollBar_akson3_alfa->SetScrollbar(45, 1, 360, 1, true);
+	m_scrollBar_akson3_beta->SetScrollbar(35, 1, 360, 1, true);
+
 }
 
 void GUIMyFrame::m_scrollBar_Translation_XOnScroll(wxScrollEvent& event)
@@ -160,6 +174,66 @@ void GUIMyFrame::m_scrollBar_Scale_ZOnScroll(wxScrollEvent& event)
 	mm_staticText_Scale_Z_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_Scale_Z->GetThumbPosition() / 100.0));
 }
 
+void GUIMyFrame::m_scrollBar_ukosny1_alfaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_ukosny1_alfaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_ukosny1_phiOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_ukosny1_phiOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_akson1_alfaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_akson1_alfaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_akson1_betaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_akson1_betaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_ukosny2_alfaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_ukosny2_alfaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_ukosny2_phiOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_ukosny2_phiOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_akson2_alfaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_akson2_alfaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_akson2_betaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_akson2_betaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_ukosny3_alfaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_ukosny3_alfaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_ukosny3_phiOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_ukosny3_phiOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_akson3_alfaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_akson3_alfaOnScroll
+}
+
+void GUIMyFrame::m_scrollBar_akson3_betaOnScroll(wxScrollEvent& event)
+{
+	// TODO: Implement m_scrollBar_akson3_betaOnScroll
+}
+
 void GUIMyFrame::mm_checkBox_Refl_XOnCheckBox(wxCommandEvent& event)
 {
 	// TODO: Implement mm_checkBox_Refl_XOnCheckBox
@@ -188,15 +262,11 @@ void GUIMyFrame::m_button_Load_SolidOnButtonClick(wxCommandEvent& event)
 		std::ifstream in(WxOpenFileDialog.GetPath().ToAscii());
 		if (in.is_open())
 		{
-			data_1.clear();
-			data_2.clear();
-			data_3.clear();
+			data.clear();
 			while (!in.eof())
 			{
 				in >> x1 >> y1 >> z1 >> x2 >> y2 >> z2 >> r >> g >> b;
-				data_1.push_back(Segment(Point(x1, y1, z1), Point(x2, y2, z2), Color(r, g, b)));
-				data_2.push_back(Segment(Point(x1, y1, z1), Point(x2, y2, z2), Color(r, g, b)));
-				data_3.push_back(Segment(Point(x1, y1, z1), Point(x2, y2, z2), Color(r, g, b)));
+				data.push_back(Segment(Point(x1, y1, z1), Point(x2, y2, z2), Color(r, g, b)));
 			}
 			in.close();
 		}
@@ -220,29 +290,29 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 
 	if (m_auinotebook1->GetSelection() == 0) {
 
-		if(m_radioBoxOrtog_1->GetSelection() == 0)		
-			Repaint_OrtogYZ(m_panel_1, data_1);
-		else if (m_radioBoxOrtog_1->GetSelection() == 1)		
-			Repaint_OrtogXZ(m_panel_1, data_1);
+		if (m_radioBoxOrtog_1->GetSelection() == 0)
+			Repaint_OrtogYZ(m_panel_1);
+		else if (m_radioBoxOrtog_1->GetSelection() == 1)
+			Repaint_OrtogXZ(m_panel_1);
 		else if (m_radioBoxOrtog_1->GetSelection() == 2)
-			Repaint_OrtogXY(m_panel_1, data_1);
+			Repaint_OrtogXY(m_panel_1);
 
 
 	}
 	else if (m_auinotebook1->GetSelection() == 1) {
 		if (m_radioBoxUkos_1->GetSelection() == 0)
-			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);
+			Repaint_ukosny(m_panel_1, 45.0, 31.0);
 		else if (m_radioBoxUkos_1->GetSelection() == 1)
-			Repaint_ukosny(m_panel_1, data_1, 63.0, 31.0);			
+			Repaint_ukosny(m_panel_1, 63.0, 31.0);
 		else if (m_radioBoxUkos_1->GetSelection() == 2)
-			Repaint_ukosny(m_panel_1, data_1, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+			Repaint_ukosny(m_panel_1, 45.0, 31.0);			// tutaj trzeba dorobiÃ¦ 2 suwaki i do funkcji przekazywane bÃªdÂ¹ odpowiednie wartoÅ“ci 
 	}
-	else if (m_auinotebook1->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
+	else if (m_auinotebook1->GetSelection() == 2) {			// TO DO gdy wÂ³Â¹czona jest zakÂ³adka 'Aksjometryczny'
 
 
 
 	}
-	else if (m_auinotebook1->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
+	else if (m_auinotebook1->GetSelection() == 3) {			// TO DO gdy wÂ³Â¹czona jest zakÂ³adka 'Perspektywiczny'
 
 
 
@@ -259,27 +329,27 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 	if (m_auinotebook2->GetSelection() == 0) {
 
 		if (m_radioBoxOrtog_2->GetSelection() == 0)
-			Repaint_OrtogYZ(m_panel_2, data_2);
+			Repaint_OrtogYZ(m_panel_2);
 		else if (m_radioBoxOrtog_2->GetSelection() == 1)
-			Repaint_OrtogXZ(m_panel_2, data_2);
+			Repaint_OrtogXZ(m_panel_2);
 		else if (m_radioBoxOrtog_2->GetSelection() == 2)
-			Repaint_OrtogXY(m_panel_2, data_2);
+			Repaint_OrtogXY(m_panel_2);
 	}
 	else if (m_auinotebook2->GetSelection() == 1) {
 		if (m_radioBoxUkos_2->GetSelection() == 0)
-			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);
+			Repaint_ukosny(m_panel_2, 45.0, 31.0);
 		else if (m_radioBoxUkos_2->GetSelection() == 1)
-			Repaint_ukosny(m_panel_2, data_2, 63.0, 31.0);			
+			Repaint_ukosny(m_panel_2, 63.0, 31.0);
 		else if (m_radioBoxUkos_2->GetSelection() == 2)
-			Repaint_ukosny(m_panel_2, data_2, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+			Repaint_ukosny(m_panel_2, 45.0, 31.0);			// tutaj trzeba dorobiÃ¦ 2 suwaki i do funkcji przekazywane bÃªdÂ¹ odpowiednie wartoÅ“ci 
 	}
-	else if (m_auinotebook2->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
-	
+	else if (m_auinotebook2->GetSelection() == 2) {			// TO DO gdy wÂ³Â¹czona jest zakÂ³adka 'Aksjometryczny'
 
 
+
 	}
-	else if (m_auinotebook2->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
-	
+	else if (m_auinotebook2->GetSelection() == 3) {			// TO DO gdy wÂ³Â¹czona jest zakÂ³adka 'Perspektywiczny'
+
 
 
 	}
@@ -294,26 +364,26 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 
 	if (m_auinotebook3->GetSelection() == 0) {
 		if (m_radioBoxOrtog_3->GetSelection() == 0)
-			Repaint_OrtogYZ(m_panel_3, data_3);
+			Repaint_OrtogYZ(m_panel_3);
 		else if (m_radioBoxOrtog_3->GetSelection() == 1)
-			Repaint_OrtogXZ(m_panel_3, data_3);
+			Repaint_OrtogXZ(m_panel_3);
 		else if (m_radioBoxOrtog_3->GetSelection() == 2)
-			Repaint_OrtogXY(m_panel_3, data_3);
+			Repaint_OrtogXY(m_panel_3);
 	}
 	else if (m_auinotebook3->GetSelection() == 1) {
 		if (m_radioBoxUkos_3->GetSelection() == 0)
-			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);
+			Repaint_ukosny(m_panel_3, 45.0, 31.0);
 		else if (m_radioBoxUkos_3->GetSelection() == 1)
-			Repaint_ukosny(m_panel_3, data_3, 63.0, 31.0);			
+			Repaint_ukosny(m_panel_3, 63.0, 31.0);
 		else if (m_radioBoxUkos_3->GetSelection() == 2)
-			Repaint_ukosny(m_panel_3, data_3, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+			Repaint_ukosny(m_panel_3, 45.0, 31.0);			// tutaj trzeba dorobiÃ¦ 2 suwaki i do funkcji przekazywane bÃªdÂ¹ odpowiednie wartoÅ“ci 
 	}
-	else if (m_auinotebook3->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
+	else if (m_auinotebook3->GetSelection() == 2) {			// TO DO gdy wÂ³Â¹czona jest zakÂ³adka 'Aksjometryczny'
 
 
 
 	}
-	else if (m_auinotebook3->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
+	else if (m_auinotebook3->GetSelection() == 3) {			// TO DO gdy wÂ³Â¹czona jest zakÂ³adka 'Perspektywiczny'
 
 
 
@@ -355,7 +425,7 @@ Matrix4 GUIMyFrame::Repaint_general()
 }
 
 
-void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num, std::vector<Segment> data_num)
+void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num)
 {
 	wxClientDC client_dc(m_panel_num);
 	wxBufferedDC dc(&client_dc);
@@ -367,7 +437,7 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num, std::vector<Segment> data
 
 	Matrix4 centre = MakeCentred();
 
-	for (auto& element : data_num)
+	for (auto& element : data)
 	{
 		Vector4 _begin;
 		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
@@ -389,9 +459,9 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num, std::vector<Segment> data
 }
 
 
-void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num, std::vector<Segment> data_num)
+void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num)
 {
-	
+
 
 
 
@@ -403,9 +473,9 @@ void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num, std::vector<Segment> data
 }
 
 
-void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num, std::vector<Segment> data_num)
+void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num)
 {
-	
+
 
 
 
@@ -417,7 +487,7 @@ void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num, std::vector<Segment> data
 }
 
 
-void GUIMyFrame::Repaint_ukosny(wxPanel* m_panel_num, std::vector<Segment> data_num, double alpha, double phi)
+void GUIMyFrame::Repaint_ukosny(wxPanel* m_panel_num, double alpha, double phi)
 {
 	wxClientDC client_dc(m_panel_num);
 	wxBufferedDC dc(&client_dc);
@@ -429,7 +499,7 @@ void GUIMyFrame::Repaint_ukosny(wxPanel* m_panel_num, std::vector<Segment> data_
 	Matrix4 centre = MakeCentred();
 
 
-	for (auto& element : data_num)	
+	for (auto& element : data)
 	{
 		Vector4 _begin;
 		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
