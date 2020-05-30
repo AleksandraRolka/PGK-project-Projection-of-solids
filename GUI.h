@@ -24,7 +24,7 @@
 #include <wx/button.h>
 #include <wx/panel.h>
 #include <wx/radiobox.h>
-#include <wx/aui/auibook.h>
+#include <wx/notebook.h>
 #include <wx/frame.h>
 
 
@@ -75,10 +75,10 @@ protected:
 	wxPanel* m_panel_1;
 	wxPanel* m_panel_2;
 	wxPanel* m_panel_3;
-	wxAuiNotebook* m_auinotebook1;
-	wxPanel* m_auinotebook1_panel_1;
+	wxNotebook* m_notebook1;
+	wxPanel* m_notebook1_panel_1;
 	wxRadioBox* m_radioBoxOrtog_1;
-	wxPanel* m_auinotebook1_panel_2;
+	wxPanel* m_notebook1_panel_2;
 	wxRadioBox* m_radioBoxUkos_1;
 	wxStaticText* m_staticText_ukosny1_alfa;
 	wxScrollBar* m_scrollBar_ukosny1_alfa;
@@ -86,7 +86,7 @@ protected:
 	wxStaticText* m_staticText_ukosny1_phi;
 	wxScrollBar* m_scrollBar_ukosny1_phi;
 	wxStaticText* m_staticText_ukosny1_phi_val;
-	wxPanel* m_auinotebook1_panel_3;
+	wxPanel* m_notebook1_panel_3;
 	wxRadioBox* m_radioBoxAkson_1;
 	wxStaticText* m_staticText_akson1_alfa;
 	wxScrollBar* m_scrollBar_akson1_alfa;
@@ -94,12 +94,12 @@ protected:
 	wxStaticText* m_staticText_akson1_beta;
 	wxScrollBar* m_scrollBar_akson1_beta;
 	wxStaticText* m_staticText_akson1_beta_val;
-	wxPanel* m_auinotebook1_panel_4;
+	wxPanel* m_notebook1_panel_4;
 	wxRadioBox* m_radioBoxPersp_1;
-	wxAuiNotebook* m_auinotebook2;
-	wxPanel* m_auinotebook2_panel_1;
+	wxNotebook* m_notebook2;
+	wxPanel* m_notebook2_panel_1;
 	wxRadioBox* m_radioBoxOrtog_2;
-	wxPanel* m_auinotebook2_panel_2;
+	wxPanel* m_notebook2_panel_2;
 	wxRadioBox* m_radioBoxUkos_2;
 	wxStaticText* m_staticText_ukosny2_alfa;
 	wxScrollBar* m_scrollBar_ukosny2_alfa;
@@ -107,7 +107,7 @@ protected:
 	wxStaticText* m_staticText_ukosny2_phi;
 	wxScrollBar* m_scrollBar_ukosny2_phi;
 	wxStaticText* m_staticText_ukosny2_phi_val;
-	wxPanel* m_auinotebook2_panel_3;
+	wxPanel* m_notebook2_panel_3;
 	wxRadioBox* m_radioBoxAkson_2;
 	wxStaticText* m_staticText_akson2_alfa;
 	wxScrollBar* m_scrollBar_akson2_alfa;
@@ -115,12 +115,12 @@ protected:
 	wxStaticText* m_staticText_akson2_beta;
 	wxScrollBar* m_scrollBar_akson2_beta;
 	wxStaticText* m_staticText_akson2_beta_val;
-	wxPanel* m_auinotebook2_panel_4;
+	wxPanel* m_notebook2_panel_4;
 	wxRadioBox* m_radioBoxPersp_2;
-	wxAuiNotebook* m_auinotebook3;
-	wxPanel* m_auinotebook3_panel_1;
+	wxNotebook* m_notebook3;
+	wxPanel* m_notebook3_panel_1;
 	wxRadioBox* m_radioBoxOrtog_3;
-	wxPanel* m_auinotebook3_panel_2;
+	wxPanel* m_notebook3_panel_2;
 	wxRadioBox* m_radioBoxUkos_3;
 	wxStaticText* m_staticText_ukosny3_alfa;
 	wxScrollBar* m_scrollBar_ukosny3_alfa;
@@ -128,7 +128,7 @@ protected:
 	wxStaticText* m_staticText_ukosny3_phi;
 	wxScrollBar* m_scrollBar_ukosny3_phi;
 	wxStaticText* m_staticText_ukosny3_phi_val;
-	wxPanel* m_auinotebook3_panel_3;
+	wxPanel* m_notebook3_panel_3;
 	wxRadioBox* m_radioBoxAkson_3;
 	wxStaticText* m_staticText_akson3_alfa;
 	wxScrollBar* m_scrollBar_akson3_alfa;
@@ -136,7 +136,7 @@ protected:
 	wxStaticText* m_staticText_akson3_beta;
 	wxScrollBar* m_scrollBar_akson3_beta;
 	wxStaticText* m_staticText_akson3_beta_val;
-	wxPanel* m_auinotebook3_panel_4;
+	wxPanel* m_notebook3_panel_4;
 	wxRadioBox* m_radioBoxPersp_3;
 
 	// Virtual event handlers, overide them in your derived class

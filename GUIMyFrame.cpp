@@ -292,7 +292,7 @@ void GUIMyFrame::m_button_Load_SettingsOnButtonClick(wxCommandEvent& event)
 void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 {
 
-	if (m_auinotebook1->GetSelection() == 0) {
+	if (m_notebook1->GetSelection() == 0) {
 
 		if (m_radioBoxOrtog_1->GetSelection() == 0)
 			Repaint_OrtogYZ(m_panel_1);
@@ -303,7 +303,7 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 
 
 	}
-	else if (m_auinotebook1->GetSelection() == 1) {
+	else if (m_notebook1->GetSelection() == 1) {
 		if (m_radioBoxUkos_1->GetSelection() == 0)
 			Repaint_ukosny(m_panel_1, 45.0, 31.0);
 		else if (m_radioBoxUkos_1->GetSelection() == 1)
@@ -311,12 +311,12 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_1->GetSelection() == 2)
 			Repaint_ukosny(m_panel_1, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
-	else if (m_auinotebook1->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
+	else if (m_notebook1->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
 
 
 
 	}
-	else if (m_auinotebook1->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
+	else if (m_notebook1->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
 
 
 
@@ -330,7 +330,7 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 {
 
-	if (m_auinotebook2->GetSelection() == 0) {
+	if (m_notebook2->GetSelection() == 0) {
 
 		if (m_radioBoxOrtog_2->GetSelection() == 0)
 			Repaint_OrtogYZ(m_panel_2);
@@ -339,7 +339,7 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxOrtog_2->GetSelection() == 2)
 			Repaint_OrtogXY(m_panel_2);
 	}
-	else if (m_auinotebook2->GetSelection() == 1) {
+	else if (m_notebook2->GetSelection() == 1) {
 		if (m_radioBoxUkos_2->GetSelection() == 0)
 			Repaint_ukosny(m_panel_2, 45.0, 31.0);
 		else if (m_radioBoxUkos_2->GetSelection() == 1)
@@ -347,12 +347,12 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_2->GetSelection() == 2)
 			Repaint_ukosny(m_panel_2, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
-	else if (m_auinotebook2->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
+	else if (m_notebook2->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
 
 
 
 	}
-	else if (m_auinotebook2->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
+	else if (m_notebook2->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
 
 
 
@@ -366,7 +366,7 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 {
 
-	if (m_auinotebook3->GetSelection() == 0) {
+	if (m_notebook3->GetSelection() == 0) {
 		if (m_radioBoxOrtog_3->GetSelection() == 0)
 			Repaint_OrtogYZ(m_panel_3);
 		else if (m_radioBoxOrtog_3->GetSelection() == 1)
@@ -374,7 +374,7 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxOrtog_3->GetSelection() == 2)
 			Repaint_OrtogXY(m_panel_3);
 	}
-	else if (m_auinotebook3->GetSelection() == 1) {
+	else if (m_notebook3->GetSelection() == 1) {
 		if (m_radioBoxUkos_3->GetSelection() == 0)
 			Repaint_ukosny(m_panel_3, 45.0, 31.0);
 		else if (m_radioBoxUkos_3->GetSelection() == 1)
@@ -382,12 +382,12 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_3->GetSelection() == 2)
 			Repaint_ukosny(m_panel_3, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
-	else if (m_auinotebook3->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
+	else if (m_notebook3->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
 
 
 
 	}
-	else if (m_auinotebook3->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
+	else if (m_notebook3->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
 
 
 

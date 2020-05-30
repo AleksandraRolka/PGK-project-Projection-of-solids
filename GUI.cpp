@@ -263,33 +263,34 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bS_Tabs;
 	bS_Tabs = new wxBoxSizer(wxHORIZONTAL);
 
-	m_auinotebook1 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE);
-	m_auinotebook1_panel_1 = new wxPanel(m_auinotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	m_auinotebook1_panel_1->SetBackgroundColour(wxColour(246, 246, 246));
+	m_notebook1 = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0);
+	m_notebook1_panel_1 = new wxPanel(m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook1_panel_1->SetBackgroundColour(wxColour(246, 246, 246));
 
-	wxBoxSizer* bS_m_auinotebook1_panel_1;
-	bS_m_auinotebook1_panel_1 = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer* bS_m_notebook1_panel_1;
+	bS_m_notebook1_panel_1 = new wxBoxSizer(wxVERTICAL);
 
 	wxString m_radioBoxOrtog_1Choices[] = { wxT("na płaszczyznę YZ "), wxT("na płaszczyznę XZ"), wxT("na płaszczyznę XY") };
 	int m_radioBoxOrtog_1NChoices = sizeof(m_radioBoxOrtog_1Choices) / sizeof(wxString);
-	m_radioBoxOrtog_1 = new wxRadioBox(m_auinotebook1_panel_1, wxID_ANY, wxT("Kierunek rzutu"), wxDefaultPosition, wxDefaultSize, m_radioBoxOrtog_1NChoices, m_radioBoxOrtog_1Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxOrtog_1 = new wxRadioBox(m_notebook1_panel_1, wxID_ANY, wxT("Kierunek rzutu"), wxDefaultPosition, wxDefaultSize, m_radioBoxOrtog_1NChoices, m_radioBoxOrtog_1Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxOrtog_1->SetSelection(0);
-	bS_m_auinotebook1_panel_1->Add(m_radioBoxOrtog_1, 0, wxALL, 5);
+	bS_m_notebook1_panel_1->Add(m_radioBoxOrtog_1, 0, wxALL, 5);
 
 
-	m_auinotebook1_panel_1->SetSizer(bS_m_auinotebook1_panel_1);
-	m_auinotebook1_panel_1->Layout();
-	bS_m_auinotebook1_panel_1->Fit(m_auinotebook1_panel_1);
-	m_auinotebook1->AddPage(m_auinotebook1_panel_1, wxT("Ortogonalny"), true, wxNullBitmap);
-	m_auinotebook1_panel_2 = new wxPanel(m_auinotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook1_panel_2;
-	bS_m_auinotebook1_panel_2 = new wxBoxSizer(wxHORIZONTAL);
+	m_notebook1_panel_1->SetSizer(bS_m_notebook1_panel_1);
+	m_notebook1_panel_1->Layout();
+	bS_m_notebook1_panel_1->Fit(m_notebook1_panel_1);
+	m_notebook1->AddPage(m_notebook1_panel_1, wxT("Ortogonalny"), false);
+	m_notebook1_panel_2 = new wxPanel(m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook1_panel_2->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook1_panel_2;
+	bS_m_notebook1_panel_2 = new wxBoxSizer(wxHORIZONTAL);
 
 	wxString m_radioBoxUkos_1Choices[] = { wxT("Gabinetowy"), wxT("Kawaleryjski"), wxT("inny") };
 	int m_radioBoxUkos_1NChoices = sizeof(m_radioBoxUkos_1Choices) / sizeof(wxString);
-	m_radioBoxUkos_1 = new wxRadioBox(m_auinotebook1_panel_2, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxUkos_1NChoices, m_radioBoxUkos_1Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxUkos_1 = new wxRadioBox(m_notebook1_panel_2, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxUkos_1NChoices, m_radioBoxUkos_1Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxUkos_1->SetSelection(0);
-	bS_m_auinotebook1_panel_2->Add(m_radioBoxUkos_1, 0, wxALL, 5);
+	bS_m_notebook1_panel_2->Add(m_radioBoxUkos_1, 0, wxALL, 5);
 
 	wxBoxSizer* bSizer_ukosny1;
 	bSizer_ukosny1 = new wxBoxSizer(wxVERTICAL);
@@ -297,16 +298,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_ukosny1_upper;
 	bSizer_ukosny1_upper = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_ukosny1_alfa = new wxStaticText(m_auinotebook1_panel_2, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny1_alfa = new wxStaticText(m_notebook1_panel_2, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny1_alfa->Wrap(-1);
 	bSizer_ukosny1_upper->Add(m_staticText_ukosny1_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_scrollBar_ukosny1_alfa = new wxScrollBar(m_auinotebook1_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_ukosny1_alfa = new wxScrollBar(m_notebook1_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_ukosny1_alfa->Enable(false);
 
 	bSizer_ukosny1_upper->Add(m_scrollBar_ukosny1_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_staticText_ukosny1_alfa_val = new wxStaticText(m_auinotebook1_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny1_alfa_val = new wxStaticText(m_notebook1_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny1_alfa_val->Wrap(-1);
 	bSizer_ukosny1_upper->Add(m_staticText_ukosny1_alfa_val, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -316,14 +317,14 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_ukosny1_bottom;
 	bSizer_ukosny1_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_ukosny1_phi = new wxStaticText(m_auinotebook1_panel_2, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny1_phi = new wxStaticText(m_notebook1_panel_2, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny1_phi->Wrap(-1);
 	bSizer_ukosny1_bottom->Add(m_staticText_ukosny1_phi, 0, wxALL, 5);
 
-	m_scrollBar_ukosny1_phi = new wxScrollBar(m_auinotebook1_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_ukosny1_phi = new wxScrollBar(m_notebook1_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	bSizer_ukosny1_bottom->Add(m_scrollBar_ukosny1_phi, 0, wxALL, 5);
 
-	m_staticText_ukosny1_phi_val = new wxStaticText(m_auinotebook1_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny1_phi_val = new wxStaticText(m_notebook1_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny1_phi_val->Wrap(-1);
 	bSizer_ukosny1_bottom->Add(m_staticText_ukosny1_phi_val, 0, wxALL, 5);
 
@@ -331,23 +332,24 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	bSizer_ukosny1->Add(bSizer_ukosny1_bottom, 1, wxEXPAND, 5);
 
 
-	bS_m_auinotebook1_panel_2->Add(bSizer_ukosny1, 1, wxEXPAND, 5);
+	bS_m_notebook1_panel_2->Add(bSizer_ukosny1, 1, wxEXPAND, 5);
 
 
-	m_auinotebook1_panel_2->SetSizer(bS_m_auinotebook1_panel_2);
+	m_notebook1_panel_2->SetSizer(bS_m_notebook1_panel_2);
 
-	m_auinotebook1_panel_2->Layout();
-	bS_m_auinotebook1_panel_2->Fit(m_auinotebook1_panel_2);
-	m_auinotebook1->AddPage(m_auinotebook1_panel_2, wxT("Ukośny"), false, wxNullBitmap);
-	m_auinotebook1_panel_3 = new wxPanel(m_auinotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook1_panel_3;
-	bS_m_auinotebook1_panel_3 = new wxBoxSizer(wxHORIZONTAL);
+	m_notebook1_panel_2->Layout();
+	bS_m_notebook1_panel_2->Fit(m_notebook1_panel_2);
+	m_notebook1->AddPage(m_notebook1_panel_2, wxT("Ukośny"), false);
+	m_notebook1_panel_3 = new wxPanel(m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook1_panel_3->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook1_panel_3;
+	bS_m_notebook1_panel_3 = new wxBoxSizer(wxHORIZONTAL);
 
 	wxString m_radioBoxAkson_1Choices[] = { wxT("Izometryczny"), wxT("inny") };
 	int m_radioBoxAkson_1NChoices = sizeof(m_radioBoxAkson_1Choices) / sizeof(wxString);
-	m_radioBoxAkson_1 = new wxRadioBox(m_auinotebook1_panel_3, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxAkson_1NChoices, m_radioBoxAkson_1Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxAkson_1 = new wxRadioBox(m_notebook1_panel_3, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxAkson_1NChoices, m_radioBoxAkson_1Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxAkson_1->SetSelection(0);
-	bS_m_auinotebook1_panel_3->Add(m_radioBoxAkson_1, 0, wxALL, 5);
+	bS_m_notebook1_panel_3->Add(m_radioBoxAkson_1, 0, wxALL, 5);
 
 
 	wxBoxSizer* bSizer_akson1;
@@ -356,16 +358,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson1_upper;
 	bSizer_akson1_upper = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson1_alfa = new wxStaticText(m_auinotebook1_panel_3, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson1_alfa = new wxStaticText(m_notebook1_panel_3, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson1_alfa->Wrap(-1);
 	bSizer_akson1_upper->Add(m_staticText_akson1_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_scrollBar_akson1_alfa = new wxScrollBar(m_auinotebook1_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_akson1_alfa = new wxScrollBar(m_notebook1_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_akson1_alfa->Enable(false);
 
 	bSizer_akson1_upper->Add(m_scrollBar_akson1_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_staticText_akson1_alfa_val = new wxStaticText(m_auinotebook1_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson1_alfa_val = new wxStaticText(m_notebook1_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson1_alfa_val->Wrap(-1);
 	bSizer_akson1_upper->Add(m_staticText_akson1_alfa_val, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -375,16 +377,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson1_bottom;
 	bSizer_akson1_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson1_beta = new wxStaticText(m_auinotebook1_panel_3, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson1_beta = new wxStaticText(m_notebook1_panel_3, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson1_beta->Wrap(-1);
 	bSizer_akson1_bottom->Add(m_staticText_akson1_beta, 0, wxALL, 5);
 
-	m_scrollBar_akson1_beta = new wxScrollBar(m_auinotebook1_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_akson1_beta = new wxScrollBar(m_notebook1_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_akson1_beta->Enable(false);
 
 	bSizer_akson1_bottom->Add(m_scrollBar_akson1_beta, 0, wxALL, 5);
 
-	m_staticText_akson1_beta_val = new wxStaticText(m_auinotebook1_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson1_beta_val = new wxStaticText(m_notebook1_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson1_beta_val->Wrap(-1);
 	bSizer_akson1_bottom->Add(m_staticText_akson1_beta_val, 0, wxALL, 5);
 
@@ -392,61 +394,63 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	bSizer_akson1->Add(bSizer_akson1_bottom, 1, wxEXPAND, 5);
 
 
-	bS_m_auinotebook1_panel_3->Add(bSizer_akson1, 1, wxEXPAND, 5);
+	bS_m_notebook1_panel_3->Add(bSizer_akson1, 1, wxEXPAND, 5);
 
 
-	m_auinotebook1_panel_3->SetSizer(bS_m_auinotebook1_panel_3);
+	m_notebook1_panel_3->SetSizer(bS_m_notebook1_panel_3);
 
-	m_auinotebook1_panel_3->Layout();
-	bS_m_auinotebook1_panel_3->Fit(m_auinotebook1_panel_3);
-	m_auinotebook1->AddPage(m_auinotebook1_panel_3, wxT("Aksonometryczny"), false, wxNullBitmap);
-	m_auinotebook1_panel_4 = new wxPanel(m_auinotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook1_panel_4;
-	bS_m_auinotebook1_panel_4 = new wxBoxSizer(wxVERTICAL);
+	m_notebook1_panel_3->Layout();
+	bS_m_notebook1_panel_3->Fit(m_notebook1_panel_3);
+	m_notebook1->AddPage(m_notebook1_panel_3, wxT("Aksonometryczny"), false);
+	m_notebook1_panel_4 = new wxPanel(m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook1_panel_4->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook1_panel_4;
+	bS_m_notebook1_panel_4 = new wxBoxSizer(wxVERTICAL);
 
 	wxString m_radioBoxPersp_1Choices[] = { wxT("Jeden punkt zbieżności") };
 	int m_radioBoxPersp_1NChoices = sizeof(m_radioBoxPersp_1Choices) / sizeof(wxString);
-	m_radioBoxPersp_1 = new wxRadioBox(m_auinotebook1_panel_4, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxPersp_1NChoices, m_radioBoxPersp_1Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxPersp_1 = new wxRadioBox(m_notebook1_panel_4, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxPersp_1NChoices, m_radioBoxPersp_1Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxPersp_1->SetSelection(0);
-	bS_m_auinotebook1_panel_4->Add(m_radioBoxPersp_1, 0, wxALL, 5);
+	bS_m_notebook1_panel_4->Add(m_radioBoxPersp_1, 0, wxALL, 5);
 
 
-	m_auinotebook1_panel_4->SetSizer(bS_m_auinotebook1_panel_4);
-	m_auinotebook1_panel_4->Layout();
-	bS_m_auinotebook1_panel_4->Fit(m_auinotebook1_panel_4);
-	m_auinotebook1->AddPage(m_auinotebook1_panel_4, wxT("Perspektywiczny"), false, wxNullBitmap);
+	m_notebook1_panel_4->SetSizer(bS_m_notebook1_panel_4);
+	m_notebook1_panel_4->Layout();
+	bS_m_notebook1_panel_4->Fit(m_notebook1_panel_4);
+	m_notebook1->AddPage(m_notebook1_panel_4, wxT("Perspektywiczny"), false);
 
-	bS_Tabs->Add(m_auinotebook1, 1, wxEXPAND | wxALL, 5);
+	bS_Tabs->Add(m_notebook1, 1, wxEXPAND | wxALL, 5);
 
-	m_auinotebook1->SetSelection(0);
+	m_notebook1->SetSelection(0);
 
-	m_auinotebook2 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE);
-	m_auinotebook2_panel_1 = new wxPanel(m_auinotebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	m_auinotebook2_panel_1->SetBackgroundColour(wxColour(246, 246, 246));
+	m_notebook2 = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0);
+	m_notebook2_panel_1 = new wxPanel(m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook2_panel_1->SetBackgroundColour(wxColour(246, 246, 246));
 
-	wxBoxSizer* bS_m_auinotebook2_panel_1;
-	bS_m_auinotebook2_panel_1 = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer* bS_m_notebook2_panel_1;
+	bS_m_notebook2_panel_1 = new wxBoxSizer(wxVERTICAL);
 
 	wxString m_radioBoxOrtog_2Choices[] = { wxT("na płaszczyznę YZ "), wxT("na płaszczyznę XZ"), wxT("na płaszczyznę XY") };
 	int m_radioBoxOrtog_2NChoices = sizeof(m_radioBoxOrtog_2Choices) / sizeof(wxString);
-	m_radioBoxOrtog_2 = new wxRadioBox(m_auinotebook2_panel_1, wxID_ANY, wxT("Kierunek rzutu"), wxDefaultPosition, wxDefaultSize, m_radioBoxOrtog_2NChoices, m_radioBoxOrtog_2Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxOrtog_2 = new wxRadioBox(m_notebook2_panel_1, wxID_ANY, wxT("Kierunek rzutu"), wxDefaultPosition, wxDefaultSize, m_radioBoxOrtog_2NChoices, m_radioBoxOrtog_2Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxOrtog_2->SetSelection(0);
-	bS_m_auinotebook2_panel_1->Add(m_radioBoxOrtog_2, 0, wxALL, 5);
+	bS_m_notebook2_panel_1->Add(m_radioBoxOrtog_2, 0, wxALL, 5);
 
 
-	m_auinotebook2_panel_1->SetSizer(bS_m_auinotebook2_panel_1);
-	m_auinotebook2_panel_1->Layout();
-	bS_m_auinotebook2_panel_1->Fit(m_auinotebook2_panel_1);
-	m_auinotebook2->AddPage(m_auinotebook2_panel_1, wxT("Ortogonalny"), false, wxNullBitmap);
-	m_auinotebook2_panel_2 = new wxPanel(m_auinotebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook2_panel_2;
-	bS_m_auinotebook2_panel_2 = new wxBoxSizer(wxHORIZONTAL);
+	m_notebook2_panel_1->SetSizer(bS_m_notebook2_panel_1);
+	m_notebook2_panel_1->Layout();
+	bS_m_notebook2_panel_1->Fit(m_notebook2_panel_1);
+	m_notebook2->AddPage(m_notebook2_panel_1, wxT("Ortogonalny"), false);
+	m_notebook2_panel_2 = new wxPanel(m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook2_panel_2->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook2_panel_2;
+	bS_m_notebook2_panel_2 = new wxBoxSizer(wxHORIZONTAL);
 
 	wxString m_radioBoxUkos_2Choices[] = { wxT("Gabinetowy"), wxT("Kawaleryjski"), wxT("inny") };
 	int m_radioBoxUkos_2NChoices = sizeof(m_radioBoxUkos_2Choices) / sizeof(wxString);
-	m_radioBoxUkos_2 = new wxRadioBox(m_auinotebook2_panel_2, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxUkos_2NChoices, m_radioBoxUkos_2Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxUkos_2 = new wxRadioBox(m_notebook2_panel_2, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxUkos_2NChoices, m_radioBoxUkos_2Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxUkos_2->SetSelection(0);
-	bS_m_auinotebook2_panel_2->Add(m_radioBoxUkos_2, 0, wxALL, 5);
+	bS_m_notebook2_panel_2->Add(m_radioBoxUkos_2, 0, wxALL, 5);
 
 	wxBoxSizer* bSizer_ukosny2;
 	bSizer_ukosny2 = new wxBoxSizer(wxVERTICAL);
@@ -454,16 +458,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_ukosny2_upper;
 	bSizer_ukosny2_upper = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_ukosny2_alfa = new wxStaticText(m_auinotebook2_panel_2, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny2_alfa = new wxStaticText(m_notebook2_panel_2, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny2_alfa->Wrap(-1);
 	bSizer_ukosny2_upper->Add(m_staticText_ukosny2_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_scrollBar_ukosny2_alfa = new wxScrollBar(m_auinotebook2_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_ukosny2_alfa = new wxScrollBar(m_notebook2_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_ukosny2_alfa->Enable(false);
 
 	bSizer_ukosny2_upper->Add(m_scrollBar_ukosny2_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_staticText_ukosny2_alfa_val = new wxStaticText(m_auinotebook2_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny2_alfa_val = new wxStaticText(m_notebook2_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny2_alfa_val->Wrap(-1);
 	bSizer_ukosny2_upper->Add(m_staticText_ukosny2_alfa_val, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -473,14 +477,14 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_ukosny2_bottom;
 	bSizer_ukosny2_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_ukosny2_phi = new wxStaticText(m_auinotebook2_panel_2, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny2_phi = new wxStaticText(m_notebook2_panel_2, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny2_phi->Wrap(-1);
 	bSizer_ukosny2_bottom->Add(m_staticText_ukosny2_phi, 0, wxALL, 5);
 
-	m_scrollBar_ukosny2_phi = new wxScrollBar(m_auinotebook2_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_ukosny2_phi = new wxScrollBar(m_notebook2_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	bSizer_ukosny2_bottom->Add(m_scrollBar_ukosny2_phi, 0, wxALL, 5);
 
-	m_staticText_ukosny2_phi_val = new wxStaticText(m_auinotebook2_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny2_phi_val = new wxStaticText(m_notebook2_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny2_phi_val->Wrap(-1);
 	bSizer_ukosny2_bottom->Add(m_staticText_ukosny2_phi_val, 0, wxALL, 5);
 
@@ -488,23 +492,24 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	bSizer_ukosny2->Add(bSizer_ukosny2_bottom, 1, wxEXPAND, 5);
 
 
-	bS_m_auinotebook2_panel_2->Add(bSizer_ukosny2, 1, wxEXPAND, 5);
+	bS_m_notebook2_panel_2->Add(bSizer_ukosny2, 1, wxEXPAND, 5);
 
 
-	m_auinotebook2_panel_2->SetSizer(bS_m_auinotebook2_panel_2);
+	m_notebook2_panel_2->SetSizer(bS_m_notebook2_panel_2);
 
-	m_auinotebook2_panel_2->Layout();
-	bS_m_auinotebook2_panel_2->Fit(m_auinotebook2_panel_2);
-	m_auinotebook2->AddPage(m_auinotebook2_panel_2, wxT("Ukośny"), false, wxNullBitmap);
-	m_auinotebook2_panel_3 = new wxPanel(m_auinotebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook2_panel_3;
-	bS_m_auinotebook2_panel_3 = new wxBoxSizer(wxHORIZONTAL);
+	m_notebook2_panel_2->Layout();
+	bS_m_notebook2_panel_2->Fit(m_notebook2_panel_2);
+	m_notebook2->AddPage(m_notebook2_panel_2, wxT("Ukośny"), false);
+	m_notebook2_panel_3 = new wxPanel(m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook2_panel_3->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook2_panel_3;
+	bS_m_notebook2_panel_3 = new wxBoxSizer(wxHORIZONTAL);
 
 	wxString m_radioBoxAkson_2Choices[] = { wxT("Izometryczny"), wxT("inny") };
 	int m_radioBoxAkson_2NChoices = sizeof(m_radioBoxAkson_2Choices) / sizeof(wxString);
-	m_radioBoxAkson_2 = new wxRadioBox(m_auinotebook2_panel_3, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxAkson_2NChoices, m_radioBoxAkson_2Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxAkson_2 = new wxRadioBox(m_notebook2_panel_3, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxAkson_2NChoices, m_radioBoxAkson_2Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxAkson_2->SetSelection(0);
-	bS_m_auinotebook2_panel_3->Add(m_radioBoxAkson_2, 0, wxALL, 5);
+	bS_m_notebook2_panel_3->Add(m_radioBoxAkson_2, 0, wxALL, 5);
 
 	wxBoxSizer* bSizer_akson2;
 	bSizer_akson2 = new wxBoxSizer(wxVERTICAL);
@@ -512,16 +517,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson2_upper;
 	bSizer_akson2_upper = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson2_alfa = new wxStaticText(m_auinotebook2_panel_3, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson2_alfa = new wxStaticText(m_notebook2_panel_3, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson2_alfa->Wrap(-1);
 	bSizer_akson2_upper->Add(m_staticText_akson2_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_scrollBar_akson2_alfa = new wxScrollBar(m_auinotebook2_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_akson2_alfa = new wxScrollBar(m_notebook2_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_akson2_alfa->Enable(false);
 
 	bSizer_akson2_upper->Add(m_scrollBar_akson2_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_staticText_akson2_alfa_val = new wxStaticText(m_auinotebook2_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson2_alfa_val = new wxStaticText(m_notebook2_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson2_alfa_val->Wrap(-1);
 	bSizer_akson2_upper->Add(m_staticText_akson2_alfa_val, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -531,16 +536,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson2_bottom;
 	bSizer_akson2_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson2_beta = new wxStaticText(m_auinotebook2_panel_3, wxID_ANY, wxT("beta :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson2_beta = new wxStaticText(m_notebook2_panel_3, wxID_ANY, wxT("beta :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson2_beta->Wrap(-1);
 	bSizer_akson2_bottom->Add(m_staticText_akson2_beta, 0, wxALL, 5);
 
-	m_scrollBar_akson2_beta = new wxScrollBar(m_auinotebook2_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_akson2_beta = new wxScrollBar(m_notebook2_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_akson2_beta->Enable(false);
 
 	bSizer_akson2_bottom->Add(m_scrollBar_akson2_beta, 0, wxALL, 5);
 
-	m_staticText_akson2_beta_val = new wxStaticText(m_auinotebook2_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson2_beta_val = new wxStaticText(m_notebook2_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson2_beta_val->Wrap(-1);
 	bSizer_akson2_bottom->Add(m_staticText_akson2_beta_val, 0, wxALL, 5);
 
@@ -548,61 +553,63 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	bSizer_akson2->Add(bSizer_akson2_bottom, 1, wxEXPAND, 5);
 
 
-	bS_m_auinotebook2_panel_3->Add(bSizer_akson2, 1, wxEXPAND, 5);
+	bS_m_notebook2_panel_3->Add(bSizer_akson2, 1, wxEXPAND, 5);
 
 
-	m_auinotebook2_panel_3->SetSizer(bS_m_auinotebook2_panel_3);
+	m_notebook2_panel_3->SetSizer(bS_m_notebook2_panel_3);
 
-	m_auinotebook2_panel_3->Layout();
-	bS_m_auinotebook2_panel_3->Fit(m_auinotebook2_panel_3);
-	m_auinotebook2->AddPage(m_auinotebook2_panel_3, wxT("Aksonometryczny"), false, wxNullBitmap);
-	m_auinotebook2_panel_4 = new wxPanel(m_auinotebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook2_panel_4;
-	bS_m_auinotebook2_panel_4 = new wxBoxSizer(wxVERTICAL);
+	m_notebook2_panel_3->Layout();
+	bS_m_notebook2_panel_3->Fit(m_notebook2_panel_3);
+	m_notebook2->AddPage(m_notebook2_panel_3, wxT("Aksonometryczny"), false);
+	m_notebook2_panel_4 = new wxPanel(m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook2_panel_4->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook2_panel_4;
+	bS_m_notebook2_panel_4 = new wxBoxSizer(wxVERTICAL);
 
 	wxString m_radioBoxPersp_2Choices[] = { wxT("Jeden punkt zbieżności") };
 	int m_radioBoxPersp_2NChoices = sizeof(m_radioBoxPersp_2Choices) / sizeof(wxString);
-	m_radioBoxPersp_2 = new wxRadioBox(m_auinotebook2_panel_4, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxPersp_2NChoices, m_radioBoxPersp_2Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxPersp_2 = new wxRadioBox(m_notebook2_panel_4, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxPersp_2NChoices, m_radioBoxPersp_2Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxPersp_2->SetSelection(0);
-	bS_m_auinotebook2_panel_4->Add(m_radioBoxPersp_2, 0, wxALL, 5);
+	bS_m_notebook2_panel_4->Add(m_radioBoxPersp_2, 0, wxALL, 5);
 
 
-	m_auinotebook2_panel_4->SetSizer(bS_m_auinotebook2_panel_4);
-	m_auinotebook2_panel_4->Layout();
-	bS_m_auinotebook2_panel_4->Fit(m_auinotebook2_panel_4);
-	m_auinotebook2->AddPage(m_auinotebook2_panel_4, wxT("Perspektywiczny"), true, wxNullBitmap);
+	m_notebook2_panel_4->SetSizer(bS_m_notebook2_panel_4);
+	m_notebook2_panel_4->Layout();
+	bS_m_notebook2_panel_4->Fit(m_notebook2_panel_4);
+	m_notebook2->AddPage(m_notebook2_panel_4, wxT("Perspektywiczny"), true);
 
-	bS_Tabs->Add(m_auinotebook2, 1, wxEXPAND | wxALL, 5);
+	bS_Tabs->Add(m_notebook2, 1, wxEXPAND | wxALL, 5);
 
-	m_auinotebook2->SetSelection(0);
+	m_notebook2->SetSelection(0);
 
-	m_auinotebook3 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE);
-	m_auinotebook3_panel_1 = new wxPanel(m_auinotebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	m_auinotebook3_panel_1->SetBackgroundColour(wxColour(246, 246, 246));
+	m_notebook3 = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0);
+	m_notebook3_panel_1 = new wxPanel(m_notebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook3_panel_1->SetBackgroundColour(wxColour(246, 246, 246));
 
-	wxBoxSizer* bS_m_auinotebook3_panel_1;
-	bS_m_auinotebook3_panel_1 = new wxBoxSizer(wxVERTICAL);
+	wxBoxSizer* bS_m_notebook3_panel_1;
+	bS_m_notebook3_panel_1 = new wxBoxSizer(wxVERTICAL);
 
 	wxString m_radioBoxOrtog_3Choices[] = { wxT("na płaszczyznę YZ "), wxT("na płaszczyznę XZ"), wxT("na płaszczyznę XY") };
 	int m_radioBoxOrtog_3NChoices = sizeof(m_radioBoxOrtog_3Choices) / sizeof(wxString);
-	m_radioBoxOrtog_3 = new wxRadioBox(m_auinotebook3_panel_1, wxID_ANY, wxT("Kierunek rzutu"), wxDefaultPosition, wxDefaultSize, m_radioBoxOrtog_3NChoices, m_radioBoxOrtog_3Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxOrtog_3 = new wxRadioBox(m_notebook3_panel_1, wxID_ANY, wxT("Kierunek rzutu"), wxDefaultPosition, wxDefaultSize, m_radioBoxOrtog_3NChoices, m_radioBoxOrtog_3Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxOrtog_3->SetSelection(0);
-	bS_m_auinotebook3_panel_1->Add(m_radioBoxOrtog_3, 0, wxALL, 5);
+	bS_m_notebook3_panel_1->Add(m_radioBoxOrtog_3, 0, wxALL, 5);
 
 
-	m_auinotebook3_panel_1->SetSizer(bS_m_auinotebook3_panel_1);
-	m_auinotebook3_panel_1->Layout();
-	bS_m_auinotebook3_panel_1->Fit(m_auinotebook3_panel_1);
-	m_auinotebook3->AddPage(m_auinotebook3_panel_1, wxT("Ortogonalny"), false, wxNullBitmap);
-	m_auinotebook3_panel_2 = new wxPanel(m_auinotebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook3_panel_2;
-	bS_m_auinotebook3_panel_2 = new wxBoxSizer(wxHORIZONTAL);
+	m_notebook3_panel_1->SetSizer(bS_m_notebook3_panel_1);
+	m_notebook3_panel_1->Layout();
+	bS_m_notebook3_panel_1->Fit(m_notebook3_panel_1);
+	m_notebook3->AddPage(m_notebook3_panel_1, wxT("Ortogonalny"), false);
+	m_notebook3_panel_2 = new wxPanel(m_notebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook3_panel_2->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook3_panel_2;
+	bS_m_notebook3_panel_2 = new wxBoxSizer(wxHORIZONTAL);
 
 	wxString m_radioBoxUkos_3Choices[] = { wxT("Gabinetowy"), wxT("Kawaleryjski"), wxT("inny") };
 	int m_radioBoxUkos_3NChoices = sizeof(m_radioBoxUkos_3Choices) / sizeof(wxString);
-	m_radioBoxUkos_3 = new wxRadioBox(m_auinotebook3_panel_2, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxUkos_3NChoices, m_radioBoxUkos_3Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxUkos_3 = new wxRadioBox(m_notebook3_panel_2, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxUkos_3NChoices, m_radioBoxUkos_3Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxUkos_3->SetSelection(0);
-	bS_m_auinotebook3_panel_2->Add(m_radioBoxUkos_3, 0, wxALL, 5);
+	bS_m_notebook3_panel_2->Add(m_radioBoxUkos_3, 0, wxALL, 5);
 
 
 	wxBoxSizer* bSizer_ukosny3;
@@ -611,16 +618,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_ukosny3_upper;
 	bSizer_ukosny3_upper = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_ukosny3_alfa = new wxStaticText(m_auinotebook3_panel_2, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny3_alfa = new wxStaticText(m_notebook3_panel_2, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny3_alfa->Wrap(-1);
 	bSizer_ukosny3_upper->Add(m_staticText_ukosny3_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_scrollBar_ukosny3_alfa = new wxScrollBar(m_auinotebook3_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_ukosny3_alfa = new wxScrollBar(m_notebook3_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_ukosny3_alfa->Enable(false);
 
 	bSizer_ukosny3_upper->Add(m_scrollBar_ukosny3_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_staticText_ukosny3_alfa_val = new wxStaticText(m_auinotebook3_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny3_alfa_val = new wxStaticText(m_notebook3_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny3_alfa_val->Wrap(-1);
 	bSizer_ukosny3_upper->Add(m_staticText_ukosny3_alfa_val, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -630,14 +637,14 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_ukosny3_bottom;
 	bSizer_ukosny3_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_ukosny3_phi = new wxStaticText(m_auinotebook3_panel_2, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny3_phi = new wxStaticText(m_notebook3_panel_2, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny3_phi->Wrap(-1);
 	bSizer_ukosny3_bottom->Add(m_staticText_ukosny3_phi, 0, wxALL, 5);
 
-	m_scrollBar_ukosny3_phi = new wxScrollBar(m_auinotebook3_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_ukosny3_phi = new wxScrollBar(m_notebook3_panel_2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	bSizer_ukosny3_bottom->Add(m_scrollBar_ukosny3_phi, 0, wxALL, 5);
 
-	m_staticText_ukosny3_phi_val = new wxStaticText(m_auinotebook3_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_ukosny3_phi_val = new wxStaticText(m_notebook3_panel_2, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_ukosny3_phi_val->Wrap(-1);
 	bSizer_ukosny3_bottom->Add(m_staticText_ukosny3_phi_val, 0, wxALL, 5);
 
@@ -645,23 +652,24 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	bSizer_ukosny3->Add(bSizer_ukosny3_bottom, 1, wxEXPAND, 5);
 
 
-	bS_m_auinotebook3_panel_2->Add(bSizer_ukosny3, 1, wxEXPAND, 5);
+	bS_m_notebook3_panel_2->Add(bSizer_ukosny3, 1, wxEXPAND, 5);
 
 
-	m_auinotebook3_panel_2->SetSizer(bS_m_auinotebook3_panel_2);
+	m_notebook3_panel_2->SetSizer(bS_m_notebook3_panel_2);
 
-	m_auinotebook3_panel_2->Layout();
-	bS_m_auinotebook3_panel_2->Fit(m_auinotebook3_panel_2);
-	m_auinotebook3->AddPage(m_auinotebook3_panel_2, wxT("Ukośny"), false, wxNullBitmap);
-	m_auinotebook3_panel_3 = new wxPanel(m_auinotebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook3_panel_3;
-	bS_m_auinotebook3_panel_3 = new wxBoxSizer(wxHORIZONTAL);
+	m_notebook3_panel_2->Layout();
+	bS_m_notebook3_panel_2->Fit(m_notebook3_panel_2);
+	m_notebook3->AddPage(m_notebook3_panel_2, wxT("Ukośny"), false);
+	m_notebook3_panel_3 = new wxPanel(m_notebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook3_panel_3->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook3_panel_3;
+	bS_m_notebook3_panel_3 = new wxBoxSizer(wxHORIZONTAL);
 
 	wxString m_radioBoxAkson_3Choices[] = { wxT("Izometryczny"), wxT("inny") };
 	int m_radioBoxAkson_3NChoices = sizeof(m_radioBoxAkson_3Choices) / sizeof(wxString);
-	m_radioBoxAkson_3 = new wxRadioBox(m_auinotebook3_panel_3, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxAkson_3NChoices, m_radioBoxAkson_3Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxAkson_3 = new wxRadioBox(m_notebook3_panel_3, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxAkson_3NChoices, m_radioBoxAkson_3Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxAkson_3->SetSelection(0);
-	bS_m_auinotebook3_panel_3->Add(m_radioBoxAkson_3, 0, wxALL, 5);
+	bS_m_notebook3_panel_3->Add(m_radioBoxAkson_3, 0, wxALL, 5);
 
 	wxBoxSizer* bSizer_akson3;
 	bSizer_akson3 = new wxBoxSizer(wxVERTICAL);
@@ -669,16 +677,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson3_upper;
 	bSizer_akson3_upper = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson3_alfa = new wxStaticText(m_auinotebook3_panel_3, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson3_alfa = new wxStaticText(m_notebook3_panel_3, wxID_ANY, wxT("alfa :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson3_alfa->Wrap(-1);
 	bSizer_akson3_upper->Add(m_staticText_akson3_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_scrollBar_akson3_alfa = new wxScrollBar(m_auinotebook3_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_akson3_alfa = new wxScrollBar(m_notebook3_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_akson3_alfa->Enable(false);
 
 	bSizer_akson3_upper->Add(m_scrollBar_akson3_alfa, 0, wxALIGN_CENTER | wxALL, 5);
 
-	m_staticText_akson3_alfa_val = new wxStaticText(m_auinotebook3_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson3_alfa_val = new wxStaticText(m_notebook3_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson3_alfa_val->Wrap(-1);
 	bSizer_akson3_upper->Add(m_staticText_akson3_alfa_val, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -688,16 +696,16 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson3_bottom;
 	bSizer_akson3_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson3_beta = new wxStaticText(m_auinotebook3_panel_3, wxID_ANY, wxT("beta :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson3_beta = new wxStaticText(m_notebook3_panel_3, wxID_ANY, wxT("beta :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson3_beta->Wrap(-1);
 	bSizer_akson3_bottom->Add(m_staticText_akson3_beta, 0, wxALL, 5);
 
-	m_scrollBar_akson3_beta = new wxScrollBar(m_auinotebook3_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
+	m_scrollBar_akson3_beta = new wxScrollBar(m_notebook3_panel_3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL);
 	m_scrollBar_akson3_beta->Enable(false);
 
 	bSizer_akson3_bottom->Add(m_scrollBar_akson3_beta, 0, wxALL, 5);
 
-	m_staticText_akson3_beta_val = new wxStaticText(m_auinotebook3_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson3_beta_val = new wxStaticText(m_notebook3_panel_3, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson3_beta_val->Wrap(-1);
 	bSizer_akson3_bottom->Add(m_staticText_akson3_beta_val, 0, wxALL, 5);
 
@@ -705,33 +713,34 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	bSizer_akson3->Add(bSizer_akson3_bottom, 1, wxEXPAND, 5);
 
 
-	bS_m_auinotebook3_panel_3->Add(bSizer_akson3, 1, wxEXPAND, 5);
+	bS_m_notebook3_panel_3->Add(bSizer_akson3, 1, wxEXPAND, 5);
 
 
-	m_auinotebook3_panel_3->SetSizer(bS_m_auinotebook3_panel_3);
+	m_notebook3_panel_3->SetSizer(bS_m_notebook3_panel_3);
 
-	m_auinotebook3_panel_3->Layout();
-	bS_m_auinotebook3_panel_3->Fit(m_auinotebook3_panel_3);
-	m_auinotebook3->AddPage(m_auinotebook3_panel_3, wxT("Aksonometryczny"), false, wxNullBitmap);
-	m_auinotebook3_panel_4 = new wxPanel(m_auinotebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
-	wxBoxSizer* bS_m_auinotebook3_panel_4;
-	bS_m_auinotebook3_panel_4 = new wxBoxSizer(wxVERTICAL);
+	m_notebook3_panel_3->Layout();
+	bS_m_notebook3_panel_3->Fit(m_notebook3_panel_3);
+	m_notebook3->AddPage(m_notebook3_panel_3, wxT("Aksonometryczny"), false);
+	m_notebook3_panel_4 = new wxPanel(m_notebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);
+	m_notebook3_panel_4->SetBackgroundColour(wxColour(243, 243, 243));
+	wxBoxSizer* bS_m_notebook3_panel_4;
+	bS_m_notebook3_panel_4 = new wxBoxSizer(wxVERTICAL);
 
 	wxString m_radioBoxPersp_3Choices[] = { wxT("Jeden punkt zbieżności") };
 	int m_radioBoxPersp_3NChoices = sizeof(m_radioBoxPersp_3Choices) / sizeof(wxString);
-	m_radioBoxPersp_3 = new wxRadioBox(m_auinotebook3_panel_4, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxPersp_3NChoices, m_radioBoxPersp_3Choices, 1, wxRA_SPECIFY_COLS);
+	m_radioBoxPersp_3 = new wxRadioBox(m_notebook3_panel_4, wxID_ANY, wxT("Podtyp"), wxDefaultPosition, wxDefaultSize, m_radioBoxPersp_3NChoices, m_radioBoxPersp_3Choices, 1, wxRA_SPECIFY_COLS);
 	m_radioBoxPersp_3->SetSelection(0);
-	bS_m_auinotebook3_panel_4->Add(m_radioBoxPersp_3, 0, wxALL, 5);
+	bS_m_notebook3_panel_4->Add(m_radioBoxPersp_3, 0, wxALL, 5);
 
 
-	m_auinotebook3_panel_4->SetSizer(bS_m_auinotebook3_panel_4);
-	m_auinotebook3_panel_4->Layout();
-	bS_m_auinotebook3_panel_4->Fit(m_auinotebook3_panel_4);
-	m_auinotebook3->AddPage(m_auinotebook3_panel_4, wxT("Perspektywiczny"), true, wxNullBitmap);
+	m_notebook3_panel_4->SetSizer(bS_m_notebook3_panel_4);
+	m_notebook3_panel_4->Layout();
+	bS_m_notebook3_panel_4->Fit(m_notebook3_panel_4);
+	m_notebook3->AddPage(m_notebook3_panel_4, wxT("Perspektywiczny"), true);
 
-	bS_Tabs->Add(m_auinotebook3, 1, wxEXPAND | wxALL, 5);
+	bS_Tabs->Add(m_notebook3, 1, wxEXPAND | wxALL, 5);
 
-	m_auinotebook3->SetSelection(0);
+	m_notebook3->SetSelection(0);
 
 	bSizerTop->Add(bS_Tabs, 1, wxEXPAND, 5);
 
