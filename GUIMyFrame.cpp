@@ -38,10 +38,11 @@ Matrix4 Translation(double dx, double dy, double dz)
 	translation.data[0][0] = 1;
 	translation.data[1][1] = 1;
 	translation.data[2][2] = 1;
+	translation.data[3][3] = 1;
 	return translation;
 }
 
-Matrix4 RotateX(int theta)
+Matrix4 RotateX(double theta)
 {
 	Matrix4 rotateX;
 	rotateX.data[0][0] = 1;
@@ -49,10 +50,11 @@ Matrix4 RotateX(int theta)
 	rotateX.data[1][2] = -sin(theta * M_PI / 180);
 	rotateX.data[2][1] = sin(theta * M_PI / 180);
 	rotateX.data[2][2] = cos(theta * M_PI / 180);
+	rotateX.data[3][3] = 1;
 	return rotateX;
 }
 
-Matrix4 RotateY(int theta)
+Matrix4 RotateY(double theta)
 {
 	Matrix4 rotateY;
 	rotateY.data[0][0] = cos(-(theta * M_PI / 180));
@@ -60,10 +62,11 @@ Matrix4 RotateY(int theta)
 	rotateY.data[1][1] = 1;
 	rotateY.data[2][0] = -sin(-(theta * M_PI / 180));
 	rotateY.data[2][2] = cos(-(theta * M_PI / 180));
+	rotateY.data[3][3] = 1;
 	return rotateY;
 }
 
-Matrix4 RotateZ(int theta)
+Matrix4 RotateZ(double theta)
 {
 	Matrix4 rotateZ;
 	rotateZ.data[0][0] = cos(theta * M_PI / 180);
@@ -71,6 +74,7 @@ Matrix4 RotateZ(int theta)
 	rotateZ.data[1][0] = sin(theta * M_PI / 180);
 	rotateZ.data[1][1] = cos(theta * M_PI / 180);
 	rotateZ.data[2][2] = 1;
+	rotateZ.data[3][3] = 1;
 	return rotateZ;
 }
 
@@ -86,9 +90,9 @@ Matrix4 Scale(double s_x, double s_y, double s_z)
 Matrix4 MakeCentred()
 {
 	Matrix4 centre;
-	centre.data[0][0] = 1;
-	centre.data[1][1] = 1;
-	centre.data[2][2] = 1;
+	centre.data[0][0] = 0.5;
+	centre.data[1][1] = 0.5;
+	centre.data[2][2] = 0.5;
 	centre.data[0][3] = 0.5;
 	centre.data[1][3] = 0.5;
 	return centre;
@@ -409,7 +413,7 @@ Matrix4 GUIMyFrame::Repaint_general()
 
 	X_rotation_matrix = RotateX(m_scrollBar_Rotation_X->GetThumbPosition());
 	Y_rotation_matrix = RotateY(m_scrollBar_Rotation_Y->GetThumbPosition());
-	Z_rotation_matrix = RotateY(m_scrollBar_Rotation_Z->GetThumbPosition());
+	Z_rotation_matrix = RotateZ(m_scrollBar_Rotation_Z->GetThumbPosition());
 
 	rotation_matrix = X_rotation_matrix * Y_rotation_matrix * Z_rotation_matrix;
 
@@ -449,9 +453,9 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY() / 2, _begin.GetZ() / 2);
+		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY() / 2, _end.GetZ() / 2);
+		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
 		dc.DrawLine(_begin.GetY() * w, _begin.GetZ() * h, _end.GetY() * w, _end.GetZ() * h);
@@ -461,29 +465,69 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num)
 
 void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num)
 {
+	wxClientDC client_dc(m_panel_num);
+	wxBufferedDC dc(&client_dc);
+	int w, h;
+	m_panel_num->GetSize(&w, &h);
+	dc.Clear();
 
+	Matrix4 transformation = Repaint_general();
 
+	Matrix4 centre = MakeCentred();
 
+	for (auto& element : data)
+	{
+		Vector4 _begin;
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+		_begin = transformation * _begin;
 
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		_end = transformation * _end;
 
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
+		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
+		_begin = centre * _begin;
+		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
+		_end = centre * _end;
 
-
-
+		dc.DrawLine(_begin.GetX() * w, _begin.GetZ() * h, _end.GetX() * w, _end.GetZ() * h);
+	}
 }
 
 
 void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num)
 {
+	wxClientDC client_dc(m_panel_num);
+	wxBufferedDC dc(&client_dc);
+	int w, h;
+	m_panel_num->GetSize(&w, &h);
+	dc.Clear();
 
+	Matrix4 transformation = Repaint_general();
 
+	Matrix4 centre = MakeCentred();
 
+	for (auto& element : data)
+	{
+		Vector4 _begin;
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+		_begin = transformation * _begin;
 
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		_end = transformation * _end;
 
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
+		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
+		_begin = centre * _begin;
+		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
+		_end = centre * _end;
 
-
-
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
+	}
 }
 
 
