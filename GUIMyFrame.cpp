@@ -95,6 +95,7 @@ Matrix4 MakeCentred()
 	centre.data[2][2] = 0.5;
 	centre.data[0][3] = 0.5;
 	centre.data[1][3] = 0.5;
+	centre.data[2][3] = 0.5;
 	return centre;
 }
 
@@ -309,7 +310,7 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_1->GetSelection() == 1)
 			Repaint_ukosny(m_panel_1, 63.0, 31.0);
 		else if (m_radioBoxUkos_1->GetSelection() == 2)
-			Repaint_ukosny(m_panel_1, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition(), m_scrollBar_ukosny1_phi->GetThumbPosition());			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
 	else if (m_notebook1->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
 
@@ -345,7 +346,7 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_2->GetSelection() == 1)
 			Repaint_ukosny(m_panel_2, 63.0, 31.0);
 		else if (m_radioBoxUkos_2->GetSelection() == 2)
-			Repaint_ukosny(m_panel_2, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition(), m_scrollBar_ukosny2_phi->GetThumbPosition());			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
 	else if (m_notebook2->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
 
@@ -380,7 +381,7 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_3->GetSelection() == 1)
 			Repaint_ukosny(m_panel_3, 63.0, 31.0);
 		else if (m_radioBoxUkos_3->GetSelection() == 2)
-			Repaint_ukosny(m_panel_3, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
 	}
 	else if (m_notebook3->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
 
@@ -405,7 +406,7 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 Matrix4 GUIMyFrame::Repaint_general()
 {
 	//////////////////////// scale /////////////////////////
-	Matrix4 scale_matrix = Scale(m_scrollBar_Scale_X->GetThumbPosition() / 100.0, -m_scrollBar_Scale_Y->GetThumbPosition() / 100.0, m_scrollBar_Scale_Z->GetThumbPosition() / 100.0);
+	Matrix4 scale_matrix = Scale(m_scrollBar_Scale_X->GetThumbPosition() / 100.0, m_scrollBar_Scale_Y->GetThumbPosition() / 100.0, m_scrollBar_Scale_Z->GetThumbPosition() / 100.0);
 
 	/////////////////////// rotation ///////////////////////
 	Matrix4 rotation_matrix;
@@ -422,7 +423,6 @@ Matrix4 GUIMyFrame::Repaint_general()
 	translation_matrix = Translation((m_scrollBar_Translation_X->GetThumbPosition() - 100.0) / 50.0,
 		(m_scrollBar_Translation_Y->GetThumbPosition() - 100.0) / 50.0, (m_scrollBar_Translation_Z->GetThumbPosition() - 100.0) / 50.0);
 
-	// transformation matrix = translation * rotation * scale
 	auto transformation = std::make_unique<Matrix4>();
 	*transformation = translation_matrix * rotation_matrix * scale_matrix;
 	return *transformation;
@@ -453,13 +453,11 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
-		dc.DrawLine(_begin.GetY() * w, _begin.GetZ() * h, _end.GetY() * w, _end.GetZ() * h);
-	}
+		dc.DrawLine(_begin.GetZ() * w, _begin.GetY() * h, _end.GetZ() * w, _end.GetY()* h);
+	}		
 }
 
 
@@ -487,12 +485,10 @@ void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
-		dc.DrawLine(_begin.GetX() * w, _begin.GetZ() * h, _end.GetX() * w, _end.GetZ() * h);
+		dc.DrawLine(_begin.GetX()* w, _begin.GetZ() * h, _end.GetX() * w, _end.GetZ() * h);
 	}
 }
 
@@ -521,9 +517,7 @@ void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
 		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
