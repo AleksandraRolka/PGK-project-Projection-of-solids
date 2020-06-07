@@ -286,11 +286,16 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_1->GetSelection() == 1) {	
 			m_scrollBar_ukosny1_alfa->Enable(false);
 			Repaint_ukosny(m_panel_1, 63.0, 31.0);
+<<<<<<< HEAD
 		}
 		else if (m_radioBoxUkos_1->GetSelection() == 2) {
 			m_scrollBar_ukosny1_alfa->Enable(true);
 			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition(), m_scrollBar_ukosny1_phi->GetThumbPosition());
 		}
+=======
+		else if (m_radioBoxUkos_1->GetSelection() == 2)
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition(), m_scrollBar_ukosny1_phi->GetThumbPosition());			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+>>>>>>> 36d3bb8fee1914a0227a3bdb82e00246c647dcf2
 	}
 	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksjometryczny'
 		if (m_radioBoxAkson_1->GetSelection() == 0) {
@@ -330,11 +335,16 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_2->GetSelection() == 1) {
 			m_scrollBar_ukosny2_alfa->Enable(false);
 			Repaint_ukosny(m_panel_2, 63.0, 31.0);
+<<<<<<< HEAD
 		}
 		else if (m_radioBoxUkos_2->GetSelection() == 2) {
 			m_scrollBar_ukosny2_alfa->Enable(true);
 			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition(), m_scrollBar_ukosny2_phi->GetThumbPosition());
 		}
+=======
+		else if (m_radioBoxUkos_2->GetSelection() == 2)
+			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition(), m_scrollBar_ukosny2_phi->GetThumbPosition());			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+>>>>>>> 36d3bb8fee1914a0227a3bdb82e00246c647dcf2
 	}
 	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
 		if (m_radioBoxAkson_2->GetSelection() == 0) {
@@ -374,11 +384,16 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxUkos_3->GetSelection() == 1) {
 			m_scrollBar_ukosny3_alfa->Enable(false);
 			Repaint_ukosny(m_panel_3, 63.0, 31.0);
+<<<<<<< HEAD
 		}
 		else if (m_radioBoxUkos_3->GetSelection() == 2) {
 			m_scrollBar_ukosny3_alfa->Enable(true);
 			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());
 		}
+=======
+		else if (m_radioBoxUkos_3->GetSelection() == 2)
+			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+>>>>>>> 36d3bb8fee1914a0227a3bdb82e00246c647dcf2
 	}
 	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
 		if (m_radioBoxAkson_3->GetSelection() == 0) {
@@ -459,8 +474,13 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num)
 		_begin = centre * _begin;
 		_end = centre * _end;
 
+<<<<<<< HEAD
 		dc.DrawLine(_begin.GetZ() * w, _begin.GetY() * h, _end.GetZ() * w, _end.GetY() * h);
 	}
+=======
+		dc.DrawLine(_begin.GetZ() * w, _begin.GetY() * h, _end.GetZ() * w, _end.GetY()* h);
+	}		
+>>>>>>> 36d3bb8fee1914a0227a3bdb82e00246c647dcf2
 }
 
 
@@ -491,7 +511,7 @@ void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num)
 		_begin = centre * _begin;
 		_end = centre * _end;
 
-		dc.DrawLine(_begin.GetX() * w, _begin.GetZ() * h, _end.GetX() * w, _end.GetZ() * h);
+		dc.DrawLine(_begin.GetX()* w, _begin.GetZ() * h, _end.GetX() * w, _end.GetZ() * h);
 	}
 }
 
