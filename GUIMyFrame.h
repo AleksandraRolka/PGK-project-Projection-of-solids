@@ -67,7 +67,8 @@ public:
 	void Repaint_OrtogXZ(wxPanel* m_panel_num);
 	void Repaint_OrtogXY(wxPanel* m_panel_num);
 	void Repaint_ukosny(wxPanel* m_panel_num, double alpha, double phi);
-
+	void Repaint_Perspektywiczny(wxPanel* m_panel_num);
+	void Repaint_Izometryczny(wxPanel* m_panel_num, double alpha, double beta);
 
 
 
