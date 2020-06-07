@@ -66,12 +66,7 @@ protected:
 	wxStaticText* m_staticText_Scale_Z;
 	wxScrollBar* m_scrollBar_Scale_Z;
 	wxStaticText* mm_staticText_Scale_Z_val;
-	wxCheckBox* m_checkBox_Refl_X;
-	wxCheckBox* m_checkBox_Refl_Y;
-	wxCheckBox* m_checkBox_Refl_Z;
 	wxButton* m_button_Load_Solid;
-	wxButton* m_button_Save_Settings;
-	wxButton* m_button_Load_Settings;
 	wxPanel* m_panel_1;
 	wxPanel* m_panel_2;
 	wxPanel* m_panel_3;
@@ -149,12 +144,7 @@ protected:
 	virtual void m_scrollBar_Scale_XOnScroll(wxScrollEvent& event) { event.Skip(); }
 	virtual void m_scrollBar_Scale_YOnScroll(wxScrollEvent& event) { event.Skip(); }
 	virtual void m_scrollBar_Scale_ZOnScroll(wxScrollEvent& event) { event.Skip(); }
-	virtual void mm_checkBox_Refl_XOnCheckBox(wxCommandEvent& event) { event.Skip(); }
-	virtual void m_checkBox_Refl_YOnCheckBox(wxCommandEvent& event) { event.Skip(); }
-	virtual void m_checkBox_Refl_ZOnCheckBox(wxCommandEvent& event) { event.Skip(); }
 	virtual void m_button_Load_SolidOnButtonClick(wxCommandEvent& event) { event.Skip(); }
-	virtual void m_button_Save_SettingsOnButtonClick(wxCommandEvent& event) { event.Skip(); }
-	virtual void m_button_Load_SettingsOnButtonClick(wxCommandEvent& event) { event.Skip(); }
 	virtual void m_panel_1OnUpdateUI(wxUpdateUIEvent& event) { event.Skip(); }
 	virtual void m_panel_2OnUpdateUI(wxUpdateUIEvent& event) { event.Skip(); }
 	virtual void m_panel_3OnUpdateUI(wxUpdateUIEvent& event) { event.Skip(); }

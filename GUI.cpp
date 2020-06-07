@@ -198,23 +198,6 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 
 	bSUpperOptions->Add(bS_Sliders, 1, wxALIGN_CENTER | wxALL, 5);
 
-	wxBoxSizer* bS_Reflection_Settings;
-	bS_Reflection_Settings = new wxBoxSizer(wxHORIZONTAL);
-
-	wxBoxSizer* bS_Reflection;
-	bS_Reflection = new wxBoxSizer(wxVERTICAL);
-
-	m_checkBox_Refl_X = new wxCheckBox(this, wxID_ANY, wxT("Odbicie X"), wxDefaultPosition, wxDefaultSize, 0);
-	bS_Reflection->Add(m_checkBox_Refl_X, 0, wxALL, 5);
-
-	m_checkBox_Refl_Y = new wxCheckBox(this, wxID_ANY, wxT("Odbicie Y"), wxDefaultPosition, wxDefaultSize, 0);
-	bS_Reflection->Add(m_checkBox_Refl_Y, 0, wxALL, 5);
-
-	m_checkBox_Refl_Z = new wxCheckBox(this, wxID_ANY, wxT("Odbicie Z"), wxDefaultPosition, wxDefaultSize, 0);
-	bS_Reflection->Add(m_checkBox_Refl_Z, 0, wxALL, 5);
-
-
-	bS_Reflection_Settings->Add(bS_Reflection, 1, wxALIGN_CENTER | wxALL, 5);
 
 	wxBoxSizer* bS_Settings;
 	bS_Settings = new wxBoxSizer(wxVERTICAL);
@@ -223,20 +206,10 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	m_button_Load_Solid = new wxButton(this, wxID_ANY, wxT("Wczytaj bryłę"), wxDefaultPosition, wxDefaultSize, 0);
 	bS_Settings->Add(m_button_Load_Solid, 0, wxALL, 5);
 
-	m_button_Save_Settings = new wxButton(this, wxID_ANY, wxT("Zapisz ustawienia"), wxDefaultPosition, wxDefaultSize, 0);
-	bS_Settings->Add(m_button_Save_Settings, 0, wxALL, 5);
-
-	m_button_Load_Settings = new wxButton(this, wxID_ANY, wxT("Wczytaj ustawienia"), wxDefaultPosition, wxDefaultSize, 0);
-	bS_Settings->Add(m_button_Load_Settings, 0, wxALL, 5);
-
-
-	bS_Reflection_Settings->Add(bS_Settings, 1, wxALIGN_CENTER | wxALL, 5);
-
-
-	bSUpperOptions->Add(bS_Reflection_Settings, 1, wxALIGN_CENTER, 5);
-
+	bSUpperOptions->Add(bS_Settings, 1, wxALIGN_CENTER | wxALL, 5);
 
 	bSizerTop->Add(bSUpperOptions, 1, wxEXPAND, 5);
+
 
 	wxBoxSizer* bS_Panels;
 	bS_Panels = new wxBoxSizer(wxHORIZONTAL);
@@ -832,12 +805,7 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	m_scrollBar_Scale_Z->Connect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(MyFrame::m_scrollBar_Scale_ZOnScroll), NULL, this);
 	m_scrollBar_Scale_Z->Connect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(MyFrame::m_scrollBar_Scale_ZOnScroll), NULL, this);
 	m_scrollBar_Scale_Z->Connect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(MyFrame::m_scrollBar_Scale_ZOnScroll), NULL, this);
-	m_checkBox_Refl_X->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(MyFrame::mm_checkBox_Refl_XOnCheckBox), NULL, this);
-	m_checkBox_Refl_Y->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(MyFrame::m_checkBox_Refl_YOnCheckBox), NULL, this);
-	m_checkBox_Refl_Z->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(MyFrame::m_checkBox_Refl_ZOnCheckBox), NULL, this);
 	m_button_Load_Solid->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::m_button_Load_SolidOnButtonClick), NULL, this);
-	m_button_Save_Settings->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::m_button_Save_SettingsOnButtonClick), NULL, this);
-	m_button_Load_Settings->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::m_button_Load_SettingsOnButtonClick), NULL, this);
 	m_panel_1->Connect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyFrame::m_panel_1OnUpdateUI), NULL, this);
 	m_panel_2->Connect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyFrame::m_panel_2OnUpdateUI), NULL, this);
 	m_panel_3->Connect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyFrame::m_panel_3OnUpdateUI), NULL, this);
@@ -1037,12 +1005,7 @@ MyFrame::~MyFrame()
 	m_scrollBar_Scale_Z->Disconnect(wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(MyFrame::m_scrollBar_Scale_ZOnScroll), NULL, this);
 	m_scrollBar_Scale_Z->Disconnect(wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler(MyFrame::m_scrollBar_Scale_ZOnScroll), NULL, this);
 	m_scrollBar_Scale_Z->Disconnect(wxEVT_SCROLL_CHANGED, wxScrollEventHandler(MyFrame::m_scrollBar_Scale_ZOnScroll), NULL, this);
-	m_checkBox_Refl_X->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(MyFrame::mm_checkBox_Refl_XOnCheckBox), NULL, this);
-	m_checkBox_Refl_Y->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(MyFrame::m_checkBox_Refl_YOnCheckBox), NULL, this);
-	m_checkBox_Refl_Z->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(MyFrame::m_checkBox_Refl_ZOnCheckBox), NULL, this);
 	m_button_Load_Solid->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::m_button_Load_SolidOnButtonClick), NULL, this);
-	m_button_Save_Settings->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::m_button_Save_SettingsOnButtonClick), NULL, this);
-	m_button_Load_Settings->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MyFrame::m_button_Load_SettingsOnButtonClick), NULL, this);
 	m_panel_1->Disconnect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyFrame::m_panel_1OnUpdateUI), NULL, this);
 	m_panel_2->Disconnect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyFrame::m_panel_2OnUpdateUI), NULL, this);
 	m_panel_3->Disconnect(wxEVT_UPDATE_UI, wxUpdateUIEventHandler(MyFrame::m_panel_3OnUpdateUI), NULL, this);

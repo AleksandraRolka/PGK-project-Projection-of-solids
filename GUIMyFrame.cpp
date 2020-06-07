@@ -95,6 +95,7 @@ Matrix4 MakeCentred()
 	centre.data[2][2] = 0.5;
 	centre.data[0][3] = 0.5;
 	centre.data[1][3] = 0.5;
+	centre.data[2][3] = 0.5;
 	return centre;
 }
 
@@ -230,28 +231,15 @@ void GUIMyFrame::m_scrollBar_ukosny3_phiOnScroll(wxScrollEvent& event)
 
 void GUIMyFrame::m_scrollBar_akson3_alfaOnScroll(wxScrollEvent& event)
 {
-	// TODO: Implement m_scrollBar_akson3_alfaOnScroll
+	//m_staticText_akson3_alfa_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_akson3_alfa->GetThumbPosition()));
 }
 
 void GUIMyFrame::m_scrollBar_akson3_betaOnScroll(wxScrollEvent& event)
 {
-	// TODO: Implement m_scrollBar_akson3_betaOnScroll
+	//m_staticText_akson3_beta_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_akson3_beta->GetThumbPosition()));
 }
 
-void GUIMyFrame::mm_checkBox_Refl_XOnCheckBox(wxCommandEvent& event)
-{
-	// TODO: Implement mm_checkBox_Refl_XOnCheckBox
-}
 
-void GUIMyFrame::m_checkBox_Refl_YOnCheckBox(wxCommandEvent& event)
-{
-	// TODO: Implement m_checkBox_Refl_YOnCheckBox
-}
-
-void GUIMyFrame::m_checkBox_Refl_ZOnCheckBox(wxCommandEvent& event)
-{
-	// TODO: Implement m_checkBox_Refl_ZOnCheckBox
-}
 
 void GUIMyFrame::m_button_Load_SolidOnButtonClick(wxCommandEvent& event)
 {
@@ -275,24 +263,13 @@ void GUIMyFrame::m_button_Load_SolidOnButtonClick(wxCommandEvent& event)
 			in.close();
 		}
 	}
-
-
 }
 
-void GUIMyFrame::m_button_Save_SettingsOnButtonClick(wxCommandEvent& event)
-{
-	// TODO: Implement m_button_Save_SettingsOnButtonClick
-}
-
-void GUIMyFrame::m_button_Load_SettingsOnButtonClick(wxCommandEvent& event)
-{
-	// TODO: Implement m_button_Load_SettingsOnButtonClick
-}
-
-void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////  PANEL 1.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)	
 {
 
-	if (m_notebook1->GetSelection() == 0) {
+	if (m_notebook1->GetSelection() == 0) {					 // gdy wlaczona jest zakladka 'Ortogonalny'
 
 		if (m_radioBoxOrtog_1->GetSelection() == 0)
 			Repaint_OrtogYZ(m_panel_1);
@@ -300,37 +277,43 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 			Repaint_OrtogXZ(m_panel_1);
 		else if (m_radioBoxOrtog_1->GetSelection() == 2)
 			Repaint_OrtogXY(m_panel_1);
-
-
 	}
-	else if (m_notebook1->GetSelection() == 1) {
-		if (m_radioBoxUkos_1->GetSelection() == 0)
+	else if (m_notebook1->GetSelection() == 1) {			  // gdy wlaczona jest zakladka 'Ukosny'
+		if (m_radioBoxUkos_1->GetSelection() == 0) {
+			m_scrollBar_ukosny1_alfa->Enable(false);
 			Repaint_ukosny(m_panel_1, 45.0, 31.0);
-		else if (m_radioBoxUkos_1->GetSelection() == 1)
+		}
+		else if (m_radioBoxUkos_1->GetSelection() == 1) {	
+			m_scrollBar_ukosny1_alfa->Enable(false);
 			Repaint_ukosny(m_panel_1, 63.0, 31.0);
-		else if (m_radioBoxUkos_1->GetSelection() == 2)
-			Repaint_ukosny(m_panel_1, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+		}
+		else if (m_radioBoxUkos_1->GetSelection() == 2) {
+			m_scrollBar_ukosny1_alfa->Enable(true);
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition(), m_scrollBar_ukosny1_phi->GetThumbPosition());
+		}
 	}
-	else if (m_notebook1->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
-
-
-
+	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksjometryczny'
+		if (m_radioBoxAkson_1->GetSelection() == 0) {
+			m_scrollBar_akson1_alfa->Enable(false);
+			Repaint_Izometryczny(m_panel_1, 35.26, 45);
+		}
+		else if (m_radioBoxAkson_1->GetSelection() == 1) {
+			m_scrollBar_akson1_alfa->Enable(true);
+			m_scrollBar_akson1_beta->Enable(true);
+			Repaint_ukosny(m_panel_1, m_scrollBar_akson1_alfa->GetThumbPosition(), m_scrollBar_akson1_beta->GetThumbPosition());
+		}
 	}
-	else if (m_notebook1->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
-
-
-
+	else if (m_notebook1->GetSelection() == 3) {			// gdy wlaczona jest zakladka 'Perspektywiczny'
+		if (m_radioBoxPersp_1->GetSelection() == 0)
+			Repaint_Perspektywiczny(m_panel_1);
 	}
-
-
-
-
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////  PANEL 2.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 {
 
-	if (m_notebook2->GetSelection() == 0) {
+	if (m_notebook2->GetSelection() == 0) {					// gdy wlaczona jest zakladka 'Ortogonalny'
 
 		if (m_radioBoxOrtog_2->GetSelection() == 0)
 			Repaint_OrtogYZ(m_panel_2);
@@ -339,34 +322,43 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxOrtog_2->GetSelection() == 2)
 			Repaint_OrtogXY(m_panel_2);
 	}
-	else if (m_notebook2->GetSelection() == 1) {
-		if (m_radioBoxUkos_2->GetSelection() == 0)
+	else if (m_notebook2->GetSelection() == 1) {			// gdy wlaczona jest zakladka 'Ukosny'
+		if (m_radioBoxUkos_2->GetSelection() == 0) {
+			m_scrollBar_ukosny2_alfa->Enable(false);
 			Repaint_ukosny(m_panel_2, 45.0, 31.0);
-		else if (m_radioBoxUkos_2->GetSelection() == 1)
+		}
+		else if (m_radioBoxUkos_2->GetSelection() == 1) {
+			m_scrollBar_ukosny2_alfa->Enable(false);
 			Repaint_ukosny(m_panel_2, 63.0, 31.0);
-		else if (m_radioBoxUkos_2->GetSelection() == 2)
-			Repaint_ukosny(m_panel_2, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+		}
+		else if (m_radioBoxUkos_2->GetSelection() == 2) {
+			m_scrollBar_ukosny2_alfa->Enable(true);
+			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition(), m_scrollBar_ukosny2_phi->GetThumbPosition());
+		}
 	}
-	else if (m_notebook2->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
-
-
+	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
+		if (m_radioBoxAkson_2->GetSelection() == 0) {
+			m_scrollBar_akson2_alfa->Enable(true);
+			Repaint_Izometryczny(m_panel_2, 35.26, 45);
+		}
+		else if (m_radioBoxAkson_2->GetSelection() == 1) {
+			m_scrollBar_akson2_alfa->Enable(true);
+			Repaint_ukosny(m_panel_2, m_scrollBar_akson2_alfa->GetThumbPosition(), m_scrollBar_akson2_beta->GetThumbPosition());
+		}
 
 	}
-	else if (m_notebook2->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
-
-
-
+	else if (m_notebook2->GetSelection() == 3) {			// gdy wlaczona jest zakladka 'Perspektywiczny'
+		if (m_radioBoxPersp_2->GetSelection() == 0)
+			Repaint_Perspektywiczny(m_panel_2);
 	}
-
-
-
 
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////  PANEL 3.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 {
 
-	if (m_notebook3->GetSelection() == 0) {
+	if (m_notebook3->GetSelection() == 0) {					// gdy wlaczona jest zakladka 'Ortogonalny'
 		if (m_radioBoxOrtog_3->GetSelection() == 0)
 			Repaint_OrtogYZ(m_panel_3);
 		else if (m_radioBoxOrtog_3->GetSelection() == 1)
@@ -374,23 +366,34 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		else if (m_radioBoxOrtog_3->GetSelection() == 2)
 			Repaint_OrtogXY(m_panel_3);
 	}
-	else if (m_notebook3->GetSelection() == 1) {
-		if (m_radioBoxUkos_3->GetSelection() == 0)
+	else if (m_notebook3->GetSelection() == 1) {			// gdy wlaczona jest zakladka 'Ukosny'
+		if (m_radioBoxUkos_3->GetSelection() == 0) {
+			m_scrollBar_ukosny3_alfa->Enable(false);
 			Repaint_ukosny(m_panel_3, 45.0, 31.0);
-		else if (m_radioBoxUkos_3->GetSelection() == 1)
+		}
+		else if (m_radioBoxUkos_3->GetSelection() == 1) {
+			m_scrollBar_ukosny3_alfa->Enable(false);
 			Repaint_ukosny(m_panel_3, 63.0, 31.0);
-		else if (m_radioBoxUkos_3->GetSelection() == 2)
-			Repaint_ukosny(m_panel_3, 45.0, 31.0);			// tutaj trzeba dorobiæ 2 suwaki i do funkcji przekazywane bêd¹ odpowiednie wartoœci 
+		}
+		else if (m_radioBoxUkos_3->GetSelection() == 2) {
+			m_scrollBar_ukosny3_alfa->Enable(true);
+			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());
+		}
 	}
-	else if (m_notebook3->GetSelection() == 2) {			// TO DO gdy w³¹czona jest zak³adka 'Aksjometryczny'
-
-
-
+	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
+		if (m_radioBoxAkson_3->GetSelection() == 0) {
+			m_scrollBar_akson3_alfa->Enable(false);
+			Repaint_Izometryczny(m_panel_3, 35.26, 45);
+		}
+		else if (m_radioBoxAkson_3->GetSelection() == 1) {
+			m_scrollBar_akson3_alfa->Enable(true);
+			m_scrollBar_akson3_beta->Enable(true);
+			Repaint_ukosny(m_panel_3, m_scrollBar_akson3_alfa->GetThumbPosition(), m_scrollBar_akson3_beta->GetThumbPosition());
+		}
 	}
-	else if (m_notebook3->GetSelection() == 3) {			// TO DO gdy w³¹czona jest zak³adka 'Perspektywiczny'
-
-
-
+	else if (m_notebook3->GetSelection() == 3) {			// gdy wlaczona jest zakladka 'Perspektywiczny'
+		if (m_radioBoxPersp_3->GetSelection() == 0)
+			Repaint_Perspektywiczny(m_panel_3);
 	}
 
 
@@ -401,11 +404,12 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////   funkcje rysujace odpowiedni typ rzutowania   ///////////////////////////////////////////////////////////////////////////////////////////////
 
 Matrix4 GUIMyFrame::Repaint_general()
 {
 	//////////////////////// scale /////////////////////////
-	Matrix4 scale_matrix = Scale(m_scrollBar_Scale_X->GetThumbPosition() / 100.0, -m_scrollBar_Scale_Y->GetThumbPosition() / 100.0, m_scrollBar_Scale_Z->GetThumbPosition() / 100.0);
+	Matrix4 scale_matrix = Scale(m_scrollBar_Scale_X->GetThumbPosition() / 100.0, m_scrollBar_Scale_Y->GetThumbPosition() / 100.0, m_scrollBar_Scale_Z->GetThumbPosition() / 100.0);
 
 	/////////////////////// rotation ///////////////////////
 	Matrix4 rotation_matrix;
@@ -422,7 +426,6 @@ Matrix4 GUIMyFrame::Repaint_general()
 	translation_matrix = Translation((m_scrollBar_Translation_X->GetThumbPosition() - 100.0) / 50.0,
 		(m_scrollBar_Translation_Y->GetThumbPosition() - 100.0) / 50.0, (m_scrollBar_Translation_Z->GetThumbPosition() - 100.0) / 50.0);
 
-	// transformation matrix = translation * rotation * scale
 	auto transformation = std::make_unique<Matrix4>();
 	*transformation = translation_matrix * rotation_matrix * scale_matrix;
 	return *transformation;
@@ -453,12 +456,10 @@ void GUIMyFrame::Repaint_OrtogYZ(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
-		dc.DrawLine(_begin.GetY() * w, _begin.GetZ() * h, _end.GetY() * w, _end.GetZ() * h);
+		dc.DrawLine(_begin.GetZ() * w, _begin.GetY() * h, _end.GetZ() * w, _end.GetY() * h);
 	}
 }
 
@@ -487,9 +488,7 @@ void GUIMyFrame::Repaint_OrtogXZ(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
 		dc.DrawLine(_begin.GetX() * w, _begin.GetZ() * h, _end.GetX() * w, _end.GetZ() * h);
@@ -521,9 +520,7 @@ void GUIMyFrame::Repaint_OrtogXY(wxPanel* m_panel_num)
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
-		_begin.Set(_begin.GetX(), _begin.GetY(), _begin.GetZ());
 		_begin = centre * _begin;
-		_end.Set(_end.GetX(), _end.GetY(), _end.GetZ());
 		_end = centre * _end;
 
 		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
@@ -557,10 +554,87 @@ void GUIMyFrame::Repaint_ukosny(wxPanel* m_panel_num, double alpha, double phi)
 
 		//double tg_alpha;
 
-		_begin.Set(_begin.GetX() + _begin.GetZ()*(cos(phi*M_PI / 180.0) / tan(alpha*M_PI / 180.0)), _begin.GetY() + _begin.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _begin.GetZ());
+		_begin.Set(_begin.GetX() + _begin.GetZ() * (cos(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _begin.GetY() + _begin.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _begin.GetZ());
 		_begin = centre * _begin;
 		_end.Set(_end.GetX() + _end.GetZ() * (cos(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _end.GetY() + _end.GetZ() * (sin(phi * M_PI / 180.0) / tan(alpha * M_PI / 180.0)), _end.GetZ());
 		_end = centre * _end;
+
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
+	}
+}
+
+void GUIMyFrame::Repaint_Perspektywiczny(wxPanel* m_panel_num)
+{
+	wxClientDC client_dc(m_panel_num);
+	wxBufferedDC dc(&client_dc);
+	int w, h;
+	m_panel_num->GetSize(&w, &h);
+	dc.Clear();
+	Matrix4 transformation = Repaint_general();
+
+	Matrix4 centre = MakeCentred();
+
+
+	for (auto& element : data)
+	{
+		Vector4 _begin;
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+		//_begin = transformation * _begin;
+
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		//_end = transformation * _end;
+
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
+
+		_begin = centre * _begin;
+		_end = centre * _end;
+
+		Matrix4 perspective;
+		perspective.data[0][0] = -2 * _begin.GetZ() / (_end.GetX() - _begin.GetX());
+		perspective.data[0][2] = (_end.GetX() + _begin.GetX()) / (_end.GetX() - _begin.GetX());
+		perspective.data[1][1] = -2 * _begin.GetZ() / (_end.GetY() - _begin.GetY());
+		perspective.data[1][2] = (_end.GetY() + _begin.GetY()) / (_end.GetY() - _begin.GetY());
+		perspective.data[2][2] = (_end.GetZ() + _begin.GetZ()) / (_begin.GetZ() - _end.GetZ());
+		perspective.data[2][3] = -2 * _begin.GetZ() * _end.GetZ() / (_begin.GetZ() - _end.GetZ());
+		perspective.data[3][2] = -1;
+
+		_begin = perspective * _begin;
+		_end = perspective * _end;
+
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
+	}
+}
+
+void GUIMyFrame::Repaint_Izometryczny(wxPanel* m_panel_num, double alpha, double beta)
+{
+	wxClientDC client_dc(m_panel_num);
+	wxBufferedDC dc(&client_dc);
+	int w, h;
+	m_panel_num->GetSize(&w, &h);
+	dc.Clear();
+
+	Matrix4 transformation = Repaint_general();
+
+	Matrix4 centre = MakeCentred();
+
+	for (auto& element : data)
+	{
+		Vector4 _begin;
+		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+		_begin = transformation * _begin;
+
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		_end = transformation * _end;
+
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
+
+		_begin.Set(cos(alpha)*_begin.GetX() + sin(alpha)*sin(beta)*_begin.GetY() + sin(alpha)*cos(beta)*_begin.GetZ(), cos(beta)*_begin.GetY() - sin(beta)*_begin.GetZ(), 0);
+		_begin = centre * _begin;
+		_end.Set(cos(alpha) * _end.GetX() + sin(alpha) * sin(beta) * _end.GetY() + sin(alpha) * cos(beta) * _end.GetZ(), cos(beta) * _end.GetY() - sin(beta) * _end.GetZ(), 0);
+		_end = centre * _end;
+
 
 		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
 	}

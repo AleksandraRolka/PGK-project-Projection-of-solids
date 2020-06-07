@@ -34,12 +34,7 @@ protected:
 	void m_scrollBar_Scale_XOnScroll(wxScrollEvent& event);
 	void m_scrollBar_Scale_YOnScroll(wxScrollEvent& event);
 	void m_scrollBar_Scale_ZOnScroll(wxScrollEvent& event);
-	void mm_checkBox_Refl_XOnCheckBox(wxCommandEvent& event);
-	void m_checkBox_Refl_YOnCheckBox(wxCommandEvent& event);
-	void m_checkBox_Refl_ZOnCheckBox(wxCommandEvent& event);
 	void m_button_Load_SolidOnButtonClick(wxCommandEvent& event);
-	void m_button_Save_SettingsOnButtonClick(wxCommandEvent& event);
-	void m_button_Load_SettingsOnButtonClick(wxCommandEvent& event);
 	void m_panel_1OnUpdateUI(wxUpdateUIEvent& event);
 	void m_panel_2OnUpdateUI(wxUpdateUIEvent& event);
 	void m_panel_3OnUpdateUI(wxUpdateUIEvent& event);
@@ -67,7 +62,8 @@ public:
 	void Repaint_OrtogXZ(wxPanel* m_panel_num);
 	void Repaint_OrtogXY(wxPanel* m_panel_num);
 	void Repaint_ukosny(wxPanel* m_panel_num, double alpha, double phi);
-
+	void Repaint_Perspektywiczny(wxPanel* m_panel_num);
+	void Repaint_Izometryczny(wxPanel* m_panel_num, double alpha, double beta);
 
 
 
