@@ -295,7 +295,7 @@ void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 			m_scrollBar_ukosny1_alfa->Enable(true);
 			m_staticText_ukosny1_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny1_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition(), m_scrollBar_ukosny1_phi->GetThumbPosition());
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny1_phi->GetThumbPosition());
 		}
 	}
 	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksjometryczny'
@@ -350,7 +350,7 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 			m_scrollBar_ukosny2_alfa->Enable(true);
 			m_staticText_ukosny2_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny2_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny2_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny2_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition(), m_scrollBar_ukosny2_phi->GetThumbPosition() + 10 );
+			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny2_phi->GetThumbPosition() + 10 );
 		}
 	}
 	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
@@ -366,7 +366,7 @@ void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 			m_scrollBar_akson2_beta->Enable(true);
 			m_staticText_akson2_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson2_alfa->GetThumbPosition()));
 			m_staticText_akson2_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson2_beta->GetThumbPosition()));
-			Repaint_ukosny(m_panel_2, m_scrollBar_akson2_alfa->GetThumbPosition(), m_scrollBar_akson2_beta->GetThumbPosition());
+			Repaint_ukosny(m_panel_2, m_scrollBar_akson2_alfa->GetThumbPosition() + 10., m_scrollBar_akson2_beta->GetThumbPosition());
 		}
 
 	}
