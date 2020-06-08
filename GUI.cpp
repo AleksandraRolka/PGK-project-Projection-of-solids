@@ -93,6 +93,7 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 
 	m_scrollBar_Rotation_X = new wxScrollBar(this, wxID_ANY, wxDefaultPosition, wxSize(150, -1), wxSB_HORIZONTAL);
 	bS_Rotation_X->Add(m_scrollBar_Rotation_X, 0, wxALL, 5);
+	Bind(wxEVT_SCROLL_THUMBTRACK, &MyFrame::m_scrollBar_Rotation_XOnScroll, this, wxID_ANY);
 
 	mm_staticText_Rotation_X_val = new wxStaticText(this, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0);
 	mm_staticText_Rotation_X_val->Wrap(-1);
@@ -350,7 +351,7 @@ MyFrame::MyFrame(wxWindow* parent, wxWindowID id, const wxString& title, const w
 	wxBoxSizer* bSizer_akson1_bottom;
 	bSizer_akson1_bottom = new wxBoxSizer(wxHORIZONTAL);
 
-	m_staticText_akson1_beta = new wxStaticText(m_notebook1_panel_3, wxID_ANY, wxT("phi :"), wxDefaultPosition, wxDefaultSize, 0);
+	m_staticText_akson1_beta = new wxStaticText(m_notebook1_panel_3, wxID_ANY, wxT("beta :"), wxDefaultPosition, wxDefaultSize, 0);
 	m_staticText_akson1_beta->Wrap(-1);
 	bSizer_akson1_bottom->Add(m_staticText_akson1_beta, 0, wxALL, 5);
 
