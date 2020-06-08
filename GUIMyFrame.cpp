@@ -404,6 +404,7 @@ void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 		}
 		else if (m_radioBoxUkos_3->GetSelection() == 2) {
 			m_scrollBar_ukosny3_alfa->Enable(true);
+
 			m_staticText_ukosny3_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny3_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny3_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny3_phi->GetThumbPosition()));
 			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition() + 10);
