@@ -269,14 +269,22 @@ void GUIMyFrame::m_scrollBar_ukosny3_phiOnScroll(wxScrollEvent& event)
 
 void GUIMyFrame::m_scrollBar_akson3_alfaOnScroll(wxScrollEvent& event)
 {
+<<<<<<< HEAD
 	m_staticText_akson3_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson3_alfa->GetThumbPosition()));
 	Repaint_panel3();
+=======
+	//m_staticText_akson3_alfa_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_akson3_alfa->GetThumbPosition()));
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 }
 
 void GUIMyFrame::m_scrollBar_akson3_betaOnScroll(wxScrollEvent& event)
 {
+<<<<<<< HEAD
 	m_staticText_akson3_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson3_beta->GetThumbPosition()));
 	Repaint_panel3();
+=======
+	//m_staticText_akson3_beta_val->SetLabel(wxString::Format(wxT("%g"), m_scrollBar_akson3_beta->GetThumbPosition()));
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 }
 
 
@@ -306,21 +314,153 @@ void GUIMyFrame::m_button_Load_SolidOnButtonClick(wxCommandEvent& event)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  PANEL 1.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)
 {
 	Repaint_panel1();
+=======
+void GUIMyFrame::m_panel_1OnUpdateUI(wxUpdateUIEvent& event)	
+{
+
+	if (m_notebook1->GetSelection() == 0) {					 // gdy wlaczona jest zakladka 'Ortogonalny'
+
+		if (m_radioBoxOrtog_1->GetSelection() == 0)
+			Repaint_OrtogYZ(m_panel_1);
+		else if (m_radioBoxOrtog_1->GetSelection() == 1)
+			Repaint_OrtogXZ(m_panel_1);
+		else if (m_radioBoxOrtog_1->GetSelection() == 2)
+			Repaint_OrtogXY(m_panel_1);
+	}
+	else if (m_notebook1->GetSelection() == 1) {			  // gdy wlaczona jest zakladka 'Ukosny'
+		if (m_radioBoxUkos_1->GetSelection() == 0) {
+			m_scrollBar_ukosny1_alfa->Enable(false);
+			Repaint_ukosny(m_panel_1, 45.0, 31.0);
+		}
+		else if (m_radioBoxUkos_1->GetSelection() == 1) {	
+			m_scrollBar_ukosny1_alfa->Enable(false);
+			Repaint_ukosny(m_panel_1, 63.0, 31.0);
+		}
+		else if (m_radioBoxUkos_1->GetSelection() == 2) {
+			m_scrollBar_ukosny1_alfa->Enable(true);
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition(), m_scrollBar_ukosny1_phi->GetThumbPosition());
+		}
+	}
+	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksjometryczny'
+		if (m_radioBoxAkson_1->GetSelection() == 0) {
+			m_scrollBar_akson1_alfa->Enable(false);
+			Repaint_Izometryczny(m_panel_1, 35.26, 45);
+		}
+		else if (m_radioBoxAkson_1->GetSelection() == 1) {
+			m_scrollBar_akson1_alfa->Enable(true);
+			m_scrollBar_akson1_beta->Enable(true);
+			Repaint_ukosny(m_panel_1, m_scrollBar_akson1_alfa->GetThumbPosition(), m_scrollBar_akson1_beta->GetThumbPosition());
+		}
+	}
+	else if (m_notebook1->GetSelection() == 3) {			// gdy wlaczona jest zakladka 'Perspektywiczny'
+		if (m_radioBoxPersp_1->GetSelection() == 0)
+			Repaint_Perspektywiczny(m_panel_1);
+	}
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  PANEL 2.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GUIMyFrame::m_panel_2OnUpdateUI(wxUpdateUIEvent& event)
 {
+<<<<<<< HEAD
 	Repaint_panel2();
+=======
+
+	if (m_notebook2->GetSelection() == 0) {					// gdy wlaczona jest zakladka 'Ortogonalny'
+
+		if (m_radioBoxOrtog_2->GetSelection() == 0)
+			Repaint_OrtogYZ(m_panel_2);
+		else if (m_radioBoxOrtog_2->GetSelection() == 1)
+			Repaint_OrtogXZ(m_panel_2);
+		else if (m_radioBoxOrtog_2->GetSelection() == 2)
+			Repaint_OrtogXY(m_panel_2);
+	}
+	else if (m_notebook2->GetSelection() == 1) {			// gdy wlaczona jest zakladka 'Ukosny'
+		if (m_radioBoxUkos_2->GetSelection() == 0) {
+			m_scrollBar_ukosny2_alfa->Enable(false);
+			Repaint_ukosny(m_panel_2, 45.0, 31.0);
+		}
+		else if (m_radioBoxUkos_2->GetSelection() == 1) {
+			m_scrollBar_ukosny2_alfa->Enable(false);
+			Repaint_ukosny(m_panel_2, 63.0, 31.0);
+		}
+		else if (m_radioBoxUkos_2->GetSelection() == 2) {
+			m_scrollBar_ukosny2_alfa->Enable(true);
+			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition(), m_scrollBar_ukosny2_phi->GetThumbPosition());
+		}
+	}
+	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
+		if (m_radioBoxAkson_2->GetSelection() == 0) {
+			m_scrollBar_akson2_alfa->Enable(true);
+			Repaint_Izometryczny(m_panel_2, 35.26, 45);
+		}
+		else if (m_radioBoxAkson_2->GetSelection() == 1) {
+			m_scrollBar_akson2_alfa->Enable(true);
+			Repaint_ukosny(m_panel_2, m_scrollBar_akson2_alfa->GetThumbPosition(), m_scrollBar_akson2_beta->GetThumbPosition());
+		}
+
+	}
+	else if (m_notebook2->GetSelection() == 3) {			// gdy wlaczona jest zakladka 'Perspektywiczny'
+		if (m_radioBoxPersp_2->GetSelection() == 0)
+			Repaint_Perspektywiczny(m_panel_2);
+	}
+
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  PANEL 3.  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GUIMyFrame::m_panel_3OnUpdateUI(wxUpdateUIEvent& event)
 {
+<<<<<<< HEAD
 	Repaint_panel3();
+=======
+
+	if (m_notebook3->GetSelection() == 0) {					// gdy wlaczona jest zakladka 'Ortogonalny'
+		if (m_radioBoxOrtog_3->GetSelection() == 0)
+			Repaint_OrtogYZ(m_panel_3);
+		else if (m_radioBoxOrtog_3->GetSelection() == 1)
+			Repaint_OrtogXZ(m_panel_3);
+		else if (m_radioBoxOrtog_3->GetSelection() == 2)
+			Repaint_OrtogXY(m_panel_3);
+	}
+	else if (m_notebook3->GetSelection() == 1) {			// gdy wlaczona jest zakladka 'Ukosny'
+		if (m_radioBoxUkos_3->GetSelection() == 0) {
+			m_scrollBar_ukosny3_alfa->Enable(false);
+			Repaint_ukosny(m_panel_3, 45.0, 31.0);
+		}
+		else if (m_radioBoxUkos_3->GetSelection() == 1) {
+			m_scrollBar_ukosny3_alfa->Enable(false);
+			Repaint_ukosny(m_panel_3, 63.0, 31.0);
+		}
+		else if (m_radioBoxUkos_3->GetSelection() == 2) {
+			m_scrollBar_ukosny3_alfa->Enable(true);
+			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());
+		}
+	}
+	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
+		if (m_radioBoxAkson_3->GetSelection() == 0) {
+			m_scrollBar_akson3_alfa->Enable(false);
+			Repaint_Izometryczny(m_panel_3, 35.26, 45);
+		}
+		else if (m_radioBoxAkson_3->GetSelection() == 1) {
+			m_scrollBar_akson3_alfa->Enable(true);
+			m_scrollBar_akson3_beta->Enable(true);
+			Repaint_ukosny(m_panel_3, m_scrollBar_akson3_alfa->GetThumbPosition(), m_scrollBar_akson3_beta->GetThumbPosition());
+		}
+	}
+	else if (m_notebook3->GetSelection() == 3) {			// gdy wlaczona jest zakladka 'Perspektywiczny'
+		if (m_radioBoxPersp_3->GetSelection() == 0)
+			Repaint_Perspektywiczny(m_panel_3);
+	}
+
+
+
+
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 }
 
 
@@ -494,16 +634,21 @@ void GUIMyFrame::Repaint_Perspektywiczny(wxPanel* m_panel_num)
 	dc.Clear();
 	Matrix4 transformation = Repaint_general();
 
+<<<<<<< HEAD
 	Matrix4 smaller = Translation(0, 0, 1.5);
 
 	Matrix4 centre = MakeCentred();
 	centre.data[0][0] = centre.data[2][2] = centre.data[1][1] = 1;
+=======
+	Matrix4 centre = MakeCentred();
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 
 
 	for (auto& element : data)
 	{
 		Vector4 _begin;
 		_begin.Set(element.begin.x, element.begin.y, element.begin.z);
+<<<<<<< HEAD
 		_begin = transformation * _begin;
 		_begin = smaller * _begin;
 
@@ -525,6 +670,32 @@ void GUIMyFrame::Repaint_Perspektywiczny(wxPanel* m_panel_num)
 			_end = centre * _end;
 			dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
 		}
+=======
+		//_begin = transformation * _begin;
+
+		Vector4 _end;
+		_end.Set(element.end.x, element.end.y, element.end.z);
+		//_end = transformation * _end;
+
+		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
+
+		_begin = centre * _begin;
+		_end = centre * _end;
+
+		Matrix4 perspective;
+		perspective.data[0][0] = -2 * _begin.GetZ() / (_end.GetX() - _begin.GetX());
+		perspective.data[0][2] = (_end.GetX() + _begin.GetX()) / (_end.GetX() - _begin.GetX());
+		perspective.data[1][1] = -2 * _begin.GetZ() / (_end.GetY() - _begin.GetY());
+		perspective.data[1][2] = (_end.GetY() + _begin.GetY()) / (_end.GetY() - _begin.GetY());
+		perspective.data[2][2] = (_end.GetZ() + _begin.GetZ()) / (_begin.GetZ() - _end.GetZ());
+		perspective.data[2][3] = -2 * _begin.GetZ() * _end.GetZ() / (_begin.GetZ() - _end.GetZ());
+		perspective.data[3][2] = -1;
+
+		_begin = perspective * _begin;
+		_end = perspective * _end;
+
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 	}
 }
 
@@ -552,11 +723,16 @@ void GUIMyFrame::Repaint_Izometryczny(wxPanel* m_panel_num, double alpha, double
 
 		dc.SetPen(wxPen(wxColour(element.color.R, element.color.G, element.color.B)));
 
+<<<<<<< HEAD
 		_begin.Set(cos(alpha) * _begin.GetX() + sin(alpha) * sin(beta) * _begin.GetY() + sin(alpha) * cos(beta) * _begin.GetZ(), cos(beta) * _begin.GetY() - sin(beta) * _begin.GetZ(), 0);
+=======
+		_begin.Set(cos(alpha)*_begin.GetX() + sin(alpha)*sin(beta)*_begin.GetY() + sin(alpha)*cos(beta)*_begin.GetZ(), cos(beta)*_begin.GetY() - sin(beta)*_begin.GetZ(), 0);
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
 		_begin = centre * _begin;
 		_end.Set(cos(alpha) * _end.GetX() + sin(alpha) * sin(beta) * _end.GetY() + sin(alpha) * cos(beta) * _end.GetZ(), cos(beta) * _end.GetY() - sin(beta) * _end.GetZ(), 0);
 		_end = centre * _end;
 
+<<<<<<< HEAD
 		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
 	}
 }
@@ -721,3 +897,9 @@ void GUIMyFrame::Repaint_panel3()
 	}
 }
 
+=======
+
+		dc.DrawLine(_begin.GetX() * w, _begin.GetY() * h, _end.GetX() * w, _end.GetY() * h);
+	}
+}
+>>>>>>> 4f73ed2... changed_the_buttons_and_sliders_enable_options
