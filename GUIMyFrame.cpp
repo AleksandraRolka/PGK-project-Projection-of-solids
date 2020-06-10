@@ -118,17 +118,17 @@ GUIMyFrame::GUIMyFrame(wxWindow* parent)
 
 
 	m_scrollBar_ukosny1_alfa->SetScrollbar(35, 1, 161, 1, true);
-	m_scrollBar_ukosny1_phi->SetScrollbar(45, 1, 361, 1, true);
+	m_scrollBar_ukosny1_phi->SetScrollbar(31, 1, 361, 1, true);
 	m_scrollBar_akson1_alfa->SetScrollbar(35, 1, 361, 1, true);
 	m_scrollBar_akson1_beta->SetScrollbar(45, 1, 361, 1, true);
 
 	m_scrollBar_ukosny2_alfa->SetScrollbar(35, 1, 161, 1, true);
-	m_scrollBar_ukosny2_phi->SetScrollbar(45, 1, 361, 1, true);
+	m_scrollBar_ukosny2_phi->SetScrollbar(31, 1, 361, 1, true);
 	m_scrollBar_akson2_alfa->SetScrollbar(35, 1, 361, 1, true);
 	m_scrollBar_akson2_beta->SetScrollbar(45, 1, 361, 1, true);
 
 	m_scrollBar_ukosny3_alfa->SetScrollbar(35, 1, 161, 1, true);
-	m_scrollBar_ukosny3_phi->SetScrollbar(45, 1, 361, 1, true);
+	m_scrollBar_ukosny3_phi->SetScrollbar(31, 1, 361, 1, true);
 	m_scrollBar_akson3_alfa->SetScrollbar(35, 1, 361, 1, true);
 	m_scrollBar_akson3_beta->SetScrollbar(45, 1, 361, 1, true);
 
@@ -577,19 +577,19 @@ void GUIMyFrame::Repaint_panel1()
 			m_scrollBar_ukosny1_alfa->Enable(false);
 			m_staticText_ukosny1_alfa_val->SetLabel(wxString::Format(wxT("%d"), 45));
 			m_staticText_ukosny1_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_1, 45.0, 31.0);
+			Repaint_ukosny(m_panel_1, 45.0, m_scrollBar_ukosny1_phi->GetThumbPosition());
 		}
 		else if (m_radioBoxUkos_1->GetSelection() == 1) {
 			m_scrollBar_ukosny1_alfa->Enable(false);
 			m_staticText_ukosny1_alfa_val->SetLabel(wxString::Format(wxT("%d"), 63));
 			m_staticText_ukosny1_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_1, 63.0, 31.0);
+			Repaint_ukosny(m_panel_1, 63.0, m_scrollBar_ukosny1_phi->GetThumbPosition());
 		}
 		else if (m_radioBoxUkos_1->GetSelection() == 2) {
 			m_scrollBar_ukosny1_alfa->Enable(true);
 			m_staticText_ukosny1_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny1_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny1_phi->GetThumbPosition());
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10. , m_scrollBar_ukosny1_phi->GetThumbPosition());
 		}
 	}
 	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksjometryczny'
@@ -598,7 +598,7 @@ void GUIMyFrame::Repaint_panel1()
 			m_scrollBar_akson1_beta->Enable(true);
 			m_staticText_akson1_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson1_alfa->GetThumbPosition()));
 			m_staticText_akson1_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson1_beta->GetThumbPosition()));
-			Repaint_Izometryczny(m_panel_1, 35.26, 45);
+			Repaint_Izometryczny(m_panel_1, 35.26, m_scrollBar_akson1_beta->GetThumbPosition());
 		}
 		else if (m_radioBoxAkson_1->GetSelection() == 1) {
 			m_scrollBar_akson1_alfa->Enable(true);
@@ -630,19 +630,19 @@ void GUIMyFrame::Repaint_panel2()
 			m_scrollBar_ukosny2_alfa->Enable(false);
 			m_staticText_ukosny2_alfa_val->SetLabel(wxString::Format(wxT("%d"), 45));
 			m_staticText_ukosny2_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny2_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_2, 45.0, 31.0);
+			Repaint_ukosny(m_panel_2, 45.0, m_scrollBar_ukosny2_phi->GetThumbPosition());
 		}
 		else if (m_radioBoxUkos_2->GetSelection() == 1) {
 			m_scrollBar_ukosny2_alfa->Enable(false);
 			m_staticText_ukosny2_alfa_val->SetLabel(wxString::Format(wxT("%d"), 63));
 			m_staticText_ukosny2_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny2_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_2, 63.0, 31.0);
+			Repaint_ukosny(m_panel_2, 63.0, m_scrollBar_ukosny2_phi->GetThumbPosition());
 		}
 		else if (m_radioBoxUkos_2->GetSelection() == 2) {
 			m_scrollBar_ukosny2_alfa->Enable(true);
 			m_staticText_ukosny2_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny2_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny2_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny2_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny2_phi->GetThumbPosition() + 10);
+			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny2_phi->GetThumbPosition());
 		}
 	}
 	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
@@ -651,7 +651,7 @@ void GUIMyFrame::Repaint_panel2()
 			m_scrollBar_akson2_beta->Enable(true);
 			m_staticText_akson2_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson2_alfa->GetThumbPosition()));
 			m_staticText_akson2_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson2_beta->GetThumbPosition()));
-			Repaint_Izometryczny(m_panel_2, 35.26, 45);
+			Repaint_Izometryczny(m_panel_2, 35.26, m_scrollBar_akson2_beta->GetThumbPosition());
 		}
 		else if (m_radioBoxAkson_2->GetSelection() == 1) {
 			m_scrollBar_akson2_alfa->Enable(true);
@@ -683,20 +683,20 @@ void GUIMyFrame::Repaint_panel3()
 			m_scrollBar_ukosny3_alfa->Enable(false);
 			m_staticText_ukosny3_alfa_val->SetLabel(wxString::Format(wxT("%d"), 45));
 			m_staticText_ukosny3_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny3_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_3, 45.0, 31.0);
+			Repaint_ukosny(m_panel_3, 45.0, m_scrollBar_ukosny3_phi->GetThumbPosition());
 		}
 		else if (m_radioBoxUkos_3->GetSelection() == 1) {
 			m_scrollBar_ukosny3_alfa->Enable(false);
 			m_staticText_ukosny3_alfa_val->SetLabel(wxString::Format(wxT("%d"), 63));
 			m_staticText_ukosny3_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny3_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_3, 63.0, 31.0);
+			Repaint_ukosny(m_panel_3, 63.0, m_scrollBar_ukosny3_phi->GetThumbPosition());
 		}
 		else if (m_radioBoxUkos_3->GetSelection() == 2) {
 			m_scrollBar_ukosny3_alfa->Enable(true);
 
 			m_staticText_ukosny3_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny3_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny3_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny3_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition() + 10);
+			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());
 		}
 	}
 	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
@@ -705,7 +705,7 @@ void GUIMyFrame::Repaint_panel3()
 			m_scrollBar_akson3_beta->Enable(true);
 			m_staticText_akson3_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson3_alfa->GetThumbPosition()));
 			m_staticText_akson3_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson3_beta->GetThumbPosition()));
-			Repaint_Izometryczny(m_panel_3, 35.26, 45);
+			Repaint_Izometryczny(m_panel_3, 35.26, m_scrollBar_akson3_beta->GetThumbPosition());
 		}
 		else if (m_radioBoxAkson_3->GetSelection() == 1) {
 			m_scrollBar_akson3_alfa->Enable(true);
