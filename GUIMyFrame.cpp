@@ -595,10 +595,10 @@ void GUIMyFrame::Repaint_panel1()
 	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksonometryczny'
 		if (m_radioBoxAkson_1->GetSelection() == 0) {
 			m_scrollBar_akson1_alfa->Enable(false);
-			m_scrollBar_akson1_beta->Enable(true);
+			m_scrollBar_akson1_beta->Enable(false);
 			m_staticText_akson1_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson1_alfa->GetThumbPosition()));
 			m_staticText_akson1_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson1_beta->GetThumbPosition()));
-			Repaint_Izometryczny(m_panel_1, 35.26, m_scrollBar_akson1_beta->GetThumbPosition());
+			Repaint_Izometryczny(m_panel_1, 35.26, 45);
 		}
 		else if (m_radioBoxAkson_1->GetSelection() == 1) {
 			m_scrollBar_akson1_alfa->Enable(true);
@@ -648,10 +648,10 @@ void GUIMyFrame::Repaint_panel2()
 	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksonometryczny'
 		if (m_radioBoxAkson_2->GetSelection() == 0) {
 			m_scrollBar_akson2_alfa->Enable(false);
-			m_scrollBar_akson2_beta->Enable(true);
+			m_scrollBar_akson2_beta->Enable(false);
 			m_staticText_akson2_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson2_alfa->GetThumbPosition()));
 			m_staticText_akson2_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson2_beta->GetThumbPosition()));
-			Repaint_Izometryczny(m_panel_2, 35.26, m_scrollBar_akson2_beta->GetThumbPosition());
+			Repaint_Izometryczny(m_panel_2, 35.26, 45);
 		}
 		else if (m_radioBoxAkson_2->GetSelection() == 1) {
 			m_scrollBar_akson2_alfa->Enable(true);
@@ -702,10 +702,10 @@ void GUIMyFrame::Repaint_panel3()
 	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksonometryczny'
 		if (m_radioBoxAkson_3->GetSelection() == 0) {
 			m_scrollBar_akson3_alfa->Enable(false);
-			m_scrollBar_akson3_beta->Enable(true);
+			m_scrollBar_akson3_beta->Enable(false);
 			m_staticText_akson3_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson3_alfa->GetThumbPosition()));
 			m_staticText_akson3_beta_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_akson3_beta->GetThumbPosition()));
-			Repaint_Izometryczny(m_panel_3, 35.26, m_scrollBar_akson3_beta->GetThumbPosition());
+			Repaint_Izometryczny(m_panel_3, 35.26, 45);
 		}
 		else if (m_radioBoxAkson_3->GetSelection() == 1) {
 			m_scrollBar_akson3_alfa->Enable(true);
