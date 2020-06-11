@@ -82,7 +82,7 @@ Matrix4 Scale(double s_x, double s_y, double s_z)
 {
 	Matrix4 scale;
 	scale.data[0][0] = s_x;
-	scale.data[1][1] = -s_y;
+	scale.data[1][1] = s_y;
 	scale.data[2][2] = s_z;
 	return scale;
 }
@@ -589,10 +589,10 @@ void GUIMyFrame::Repaint_panel1()
 			m_scrollBar_ukosny1_alfa->Enable(true);
 			m_staticText_ukosny1_alfa_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10));
 			m_staticText_ukosny1_phi_val->SetLabel(wxString::Format(wxT("%d"), m_scrollBar_ukosny1_phi->GetThumbPosition()));
-			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10. , m_scrollBar_ukosny1_phi->GetThumbPosition());
+			Repaint_ukosny(m_panel_1, m_scrollBar_ukosny1_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny1_phi->GetThumbPosition());
 		}
 	}
-	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksjometryczny'
+	else if (m_notebook1->GetSelection() == 2) {			 // gdy wlaczona jest zakladka 'Aksonometryczny'
 		if (m_radioBoxAkson_1->GetSelection() == 0) {
 			m_scrollBar_akson1_alfa->Enable(false);
 			m_scrollBar_akson1_beta->Enable(true);
@@ -645,7 +645,7 @@ void GUIMyFrame::Repaint_panel2()
 			Repaint_ukosny(m_panel_2, m_scrollBar_ukosny2_alfa->GetThumbPosition() + 10., m_scrollBar_ukosny2_phi->GetThumbPosition());
 		}
 	}
-	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
+	else if (m_notebook2->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksonometryczny'
 		if (m_radioBoxAkson_2->GetSelection() == 0) {
 			m_scrollBar_akson2_alfa->Enable(false);
 			m_scrollBar_akson2_beta->Enable(true);
@@ -699,7 +699,7 @@ void GUIMyFrame::Repaint_panel3()
 			Repaint_ukosny(m_panel_3, m_scrollBar_ukosny3_alfa->GetThumbPosition(), m_scrollBar_ukosny3_phi->GetThumbPosition());
 		}
 	}
-	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksjometryczny'
+	else if (m_notebook3->GetSelection() == 2) {			// gdy wlaczona jest zakladka 'Aksonometryczny'
 		if (m_radioBoxAkson_3->GetSelection() == 0) {
 			m_scrollBar_akson3_alfa->Enable(false);
 			m_scrollBar_akson3_beta->Enable(true);
