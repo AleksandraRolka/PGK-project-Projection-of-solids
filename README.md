@@ -1,5 +1,5 @@
 # PGK-project-Projection-of-solids
-Project for our university course - computer graphic basics. 
+Project for our university course - Fundamentals of Computer Graphics. 
 
 
 # Authors:
