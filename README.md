@@ -2,7 +2,7 @@
 Project for our university course - computer graphic basics. 
 
 
-#Authors:
+# Authors:
 * [Aleksadra Rolka](https://github.com/AleksandraRolka)
 
 * [Gabriela Leśniak](https://github.com/gabi15)
